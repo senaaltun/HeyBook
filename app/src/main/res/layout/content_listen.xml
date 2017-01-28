@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_listen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="heybook.team1.com.heybookv2.Activity.Listen"
+    tools:showIn="@layout/app_bar_listen">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listenBookName"
+        android:textSize="35dp"
+        android:textColor="#FFF"
+        android:textStyle="bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/seekBarPlayer"
+        android:layout_above="@+id/button2"
+        android:layout_alignRight="@+id/listenBookName"
+        android:layout_alignEnd="@+id/listenBookName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/currentDuration"
+        android:textColor="#FFF"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forward"
+        android:id="@+id/button"
+        android:background="#FFF"
+        android:layout_below="@+id/currentDuration"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:id="@+id/button3"
+        android:background="#FFF"
+        android:layout_below="@+id/seekBarPlayer"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toLeftOf="@+id/button4"
+        android:layout_toStartOf="@+id/button4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rewind"
+        android:id="@+id/button4"
+        android:background="#FFF"
+        android:layout_alignBaseline="@+id/button3"
+        android:layout_alignBottom="@+id/button3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/totalDuration"
+        android:textColor="#FFF"
+        android:layout_alignBottom="@+id/seekBarPlayer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pause"
+        android:id="@+id/button2"
+        android:background="#FFF"
+        android:layout_toRightOf="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_below="@+id/listenBookName"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

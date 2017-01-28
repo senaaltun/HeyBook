@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_vitrin"
+            android:icon="@drawable/vitrin"
+            android:title="Vitrin" />
+        <item
+            android:id="@+id/nav_kitaplarım"
+            android:icon="@drawable/kitaplarim"
+            android:title="Kitaplarım" />
+        <item
+            android:id="@+id/nav_favorilerim"
+            android:icon="@drawable/favorilerim"
+            android:title="Favorilerim" />
+        <item
+            android:id="@+id/nav_sepet"
+            android:icon="@drawable/sepet"
+            android:title="Sepet" />
+        <item
+            android:id="@+id/nav_gecmis"
+            android:icon="@drawable/satinalma_gecmisi"
+            android:title="Satınalma Geçmişi" />
+        <item
+            android:id="@+id/nav_ayarlar"
+            android:icon="@drawable/ayarlar"
+            android:title="Ayarlar" />
+    </group>
+
+
+</menu>

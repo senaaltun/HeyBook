@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context="heybook.team1.com.heybookv2.Activity.Login">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/hintName"
+        android:ems="10"
+        android:layout_marginBottom="189dp"
+        android:textColor="#FFF"
+        android:id="@+id/userName"
+        android:layout_alignParentBottom="true"
+        android:textColorHint="#FFF"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/hintPassword"
+        android:textColorHint="#FFF"
+        android:textColor="#FFF"
+        android:ems="10"
+        android:layout_alignTop="@+id/userName"
+        android:layout_alignRight="@+id/userName"
+        android:layout_alignEnd="@+id/userName"
+        android:layout_marginTop="49dp"
+        android:id="@+id/password" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:background="#F00"
+        android:textColor="#FFF"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password"
+        android:layout_alignRight="@+id/password"
+        android:layout_alignEnd="@+id/password" />
+</RelativeLayout>
