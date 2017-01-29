@@ -18,4 +18,5 @@
     <string name="forward"><![CDATA[>>]]></string>
     <string name="pause">||</string>
     <string name="srch">Kitap Ara</string>
+    <string name="title_activity_search_result">SearchResult</string>
 </resources>

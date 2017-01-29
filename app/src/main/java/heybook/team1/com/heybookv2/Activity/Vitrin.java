@@ -52,7 +52,7 @@ public class Vitrin extends BaseActivity {
         ApiClientInterface apiService =
                 ApiClient.getClient().create(ApiClientInterface.class);
 
-        Call<Book> call = apiService.getBook();
+        Call<Book> call = apiService.getAllBooks();
 
         call.enqueue(new Callback<Book>() {
             @Override

@@ -1,10 +1,12 @@
 package heybook.team1.com.heybookv2.Model;
 
+import java.io.Serializable;
+
 /**
- * Created by Nokta on 2.01.2017.
+ * Created by Sena Altun on 2.01.2017.
  */
 
-public class Data {
+public class Data implements Serializable {
     private String book_id;
     private String category_id;
     private String publisher_id;
@@ -30,6 +32,8 @@ public class Data {
     private String narrator_books;
     private String publisher_title;
     private String publisher_books;
+
+
 
 
     public String getBook_id() {

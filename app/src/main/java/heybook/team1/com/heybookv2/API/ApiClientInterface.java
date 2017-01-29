@@ -16,4 +16,8 @@ public interface ApiClientInterface {
     @GET("/api.php?request=users")
     Call<User> getUser();
 
+
+    @GET("/api.php?request=books")
+    Call<Book> getAllBooks();
+
 }

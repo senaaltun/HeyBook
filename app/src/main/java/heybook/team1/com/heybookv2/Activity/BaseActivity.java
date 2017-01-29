@@ -9,12 +9,28 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import heybook.team1.com.heybookv2.API.ApiClient;
+import heybook.team1.com.heybookv2.API.ApiClientInterface;
+import heybook.team1.com.heybookv2.Adapter.ResultBookAdapter;
+import heybook.team1.com.heybookv2.Adapter.VitrinBookAdapter;
+import heybook.team1.com.heybookv2.Model.Book;
+import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sena Altun on 7.01.2017.
@@ -22,6 +38,8 @@ import heybook.team1.com.heybookv2.R;
 
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private ArrayList<Data> resultDataList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +63,7 @@ public class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -62,9 +81,55 @@ public class BaseActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                ApiClientInterface apiService =
+                        ApiClient.getClient().create(ApiClientInterface.class);
+
+                Call<Book> call = apiService.getAllBooks();
+
+                call.enqueue(new Callback<Book>() {
+                    @Override
+                    public void onResponse(Call<Book> call, Response<Book> response) {
+                        Book book = response.body();
+                        List<Data> data = book.getData();
+                        resultDataList = new ArrayList<>();
+
+
+                        for(int i = 0;i<data.size();i++){
+                            if(data.get(i).getBook_title().equals(query)){
+                                resultDataList.add(data.get(i));
+                            }
+                        }
+
+                        Intent intent = new Intent(BaseActivity.this,SearchResult.class);
+                        intent.putExtra("resultDataList",resultDataList);
+                        startActivity(intent);
+
+
+                    }
+                    @Override
+                    public void onFailure(Call<Book> call, Throwable t) {
+                        Log.e("MyApp", "onFailure: " + t.toString());
+                    }
+                });
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -109,4 +174,5 @@ public class BaseActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
