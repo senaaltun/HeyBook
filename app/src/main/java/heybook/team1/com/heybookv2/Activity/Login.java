@@ -1,6 +1,8 @@
 package heybook.team1.com.heybookv2.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,12 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
     public void getUser(){
         ApiClientInterface apiService =
                 ApiClient.getClient().create(ApiClientInterface.class);
@@ -59,24 +67,33 @@ public class Login extends AppCompatActivity {
                     public void onClick(View view) {
                         String username = userName.getText().toString();
                         String pw = password.getText().toString();
+                        for(int i=0;i<userData.size();i++){
+                            if(userData.get(i).getUser_title().equals(username)
+                                    && userData.get(i).getPassword().equals(pw)){
+                                SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+                                int num = sharedPreferences.getInt("isLogged",0);
+                                if(num == 0){
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt("isLogged",1);
+                                    editor.commit();
+                                }else{
+                                    Intent pos = getIntent();
+                                    int p = pos.getIntExtra("bookPos",0);
+                                    Intent intent = new Intent(Login.this,Listen.class);
+                                    intent.putExtra("BookPosition",p);
+                                    startActivity(intent);
+                                }
 
+                            }
 
-
-                        if(userData.get(0).getUser_title().equals(username) && userData.get(0).getPassword().equals(pw)){
-                            Log.d("Login","Success");
-                            Intent pos = getIntent();
-                            int p = pos.getIntExtra("bookPos",0);
-                            Intent intent = new Intent(Login.this,Listen.class);
-                            intent.putExtra("BookPosition",p);
-                            startActivity(intent);
                         }
+
             }
 
 
         });
 
     }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 

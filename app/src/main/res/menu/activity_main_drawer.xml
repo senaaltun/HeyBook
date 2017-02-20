@@ -26,6 +26,14 @@
             android:id="@+id/nav_ayarlar"
             android:icon="@drawable/ayarlar"
             android:title="Ayarlar" />
+        <item
+            android:id="@+id/nav_kayit"
+            android:icon="@drawable/ayarlar"
+            android:title="Kayıt Ol"/>
+        <item
+            android:id="@+id/nav_cikis"
+            android:icon="@drawable/ayarlar"
+            android:title="Çıkış Yap"/>
     </group>
 
 

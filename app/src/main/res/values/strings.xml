@@ -19,4 +19,12 @@
     <string name="pause">||</string>
     <string name="srch">Kitap Ara</string>
     <string name="title_activity_search_result">SearchResult</string>
+    <string name="add_favorites">Favorilere Ekle</string>
+    <string name="buy">Satın Al</string>
+    <string name="title_activity_register">Register</string>
+    <string name="register">Kayıt Ol</string>
+    <string name="register_button">Gönder</string>
+    <string name="add_to_chart">Sepete Ekle</string>
+    <string name="summary">Özet</string>
+    <string name="title_activity_logout">Logout</string>
 </resources>

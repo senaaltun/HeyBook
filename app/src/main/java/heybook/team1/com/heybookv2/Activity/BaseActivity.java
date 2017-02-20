@@ -45,6 +45,8 @@ public class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
     }
 
     @Override
@@ -101,15 +103,19 @@ public class BaseActivity extends AppCompatActivity
 
 
                         for(int i = 0;i<data.size();i++){
-                            if(data.get(i).getBook_title().equals(query)){
+                            if(data.get(i).getBook_title().equalsIgnoreCase(query)
+                                    || data.get(i).getBook_title().startsWith(query)){
                                 resultDataList.add(data.get(i));
                             }
                         }
-
-                        Intent intent = new Intent(BaseActivity.this,SearchResult.class);
-                        intent.putExtra("resultDataList",resultDataList);
-                        startActivity(intent);
-
+                        if(resultDataList.size() == 0){
+                            Toast.makeText(getApplicationContext(),
+                                    "Aradığınız kriterlere uygun kitap bulunamadı.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Intent intent = new Intent(BaseActivity.this, SearchResult.class);
+                            intent.putExtra("resultDataList", resultDataList);
+                            startActivity(intent);
+                        }
 
                     }
                     @Override
@@ -168,6 +174,10 @@ public class BaseActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_ayarlar){
 
+        }else if(id == R.id.nav_kayit){
+            startActivity(new Intent(BaseActivity.this,Register.class));
+        }else if(id == R.id.nav_cikis){
+            startActivity(new Intent(BaseActivity.this,Logout.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -41,6 +41,14 @@
         <activity
             android:name=".Activity.SearchResult"
             android:label="@string/title_activity_search_result"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Register"
+            android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Logout"
+            android:label="@string/title_activity_logout"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

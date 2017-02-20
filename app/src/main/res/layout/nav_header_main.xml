@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
@@ -20,14 +20,25 @@
         app:srcCompat="@drawable/hb_icon" />
 
     <TextView
+        android:id="@+id/navHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#F00"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="HeyBook"
+        android:text="HeyBook!"
         android:textStyle="bold"
+        android:layout_below="@+id/imageView"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+    <TextView
+        android:id="@+id/loggedUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/imageView"
+        />
 
 
-</LinearLayout>
+
+</RelativeLayout>
