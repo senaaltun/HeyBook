@@ -45,6 +45,8 @@ public class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
     }
 
     @Override
@@ -105,11 +107,14 @@ public class BaseActivity extends AppCompatActivity
                                 resultDataList.add(data.get(i));
                             }
                         }
-
-                        Intent intent = new Intent(BaseActivity.this,SearchResult.class);
-                        intent.putExtra("resultDataList",resultDataList);
-                        startActivity(intent);
-
+                        if(resultDataList.size() == 0){
+                            Toast.makeText(getApplicationContext(),
+                                    "Aradığınız kriterlere uygun kitap bulunamadı.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Intent intent = new Intent(BaseActivity.this, SearchResult.class);
+                            intent.putExtra("resultDataList", resultDataList);
+                            startActivity(intent);
+                        }
 
                     }
                     @Override

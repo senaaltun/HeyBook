@@ -1,6 +1,7 @@
 package heybook.team1.com.heybookv2.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class SingleBook extends BaseActivity {
 
         coverPhoto = (ImageView) findViewById(R.id.coverPhoto);
         description = (TextView) findViewById(R.id.description);
-        listenButton = (Button)findViewById(R.id.listenButton);
+        //listenButton = (Button)findViewById(R.id.listenButton);
 
     }
 
@@ -77,18 +78,29 @@ public class SingleBook extends BaseActivity {
                     description.setText(data.get(pos).getDescription());
                     getSupportActionBar().setTitle(data.get(pos).getBook_title());
 
-                listenButton.setOnClickListener(new View.OnClickListener() {
+               /* listenButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(SingleBook.this,"Kitabı dinleyebilmeniz için önce giriş yapmanız gerekmektedir",Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+                        int num = sharedPreferences.getInt("isLogged",0);
+                        if(num==0){
+                            Toast.makeText(SingleBook.this,"Kitabı dinleyebilmeniz için önce giriş yapmanız gerekmektedir",Toast.LENGTH_SHORT).show();
 
                             Intent loginIntent = new Intent(SingleBook.this,Login.class);
                             loginIntent.putExtra("bookPos",pos);
                             startActivity(loginIntent);
+                        }else{
+                            Intent pos = getIntent();
+                            int p = pos.getIntExtra("bookPos",0);
+                            Intent intent = new Intent(SingleBook.this,Listen.class);
+                            intent.putExtra("BookPosition",p);
+                            startActivity(intent);
+                        }
+
 
 
                     }
-                });
+                });*/
 
 
 

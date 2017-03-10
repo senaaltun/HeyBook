@@ -9,13 +9,7 @@
     tools:showIn="@layout/app_bar_single_book"
     tools:context="heybook.team1.com.heybookv2.Activity.SingleBook"
     >
-    <ImageView
-        android:id="@+id/coverPhoto"
-        android:layout_width="1000dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,21 +24,51 @@
         android:layout_height="wrap_content"
         android:id="@+id/description"
         android:layout_marginLeft="5dp"
+        android:layout_margin="10dp"
         android:textColor="#000"
         android:textStyle="bold|italic"
         android:layout_below="@+id/summary"/>
 
-    <Button
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/coverPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:text="@string/add_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listenButton"
-        android:layout_marginTop="30dp"
-        android:background="#000"
+        android:id="@+id/checkBox"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/description"
+        android:layout_toEndOf="@+id/description"
+        android:layout_marginBottom="69dp" />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBuy"
+        android:background="#F00"
         android:textColor="#FFF"
-        android:text="@string/listen"
-        android:layout_below="@+id/description"
+        android:text="@string/buy"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookPrice"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:layout_alignBaseline="@+id/buttonBuy"
+        android:layout_alignBottom="@+id/buttonBuy"
+        android:layout_alignLeft="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox" />
 
 
 </RelativeLayout>
