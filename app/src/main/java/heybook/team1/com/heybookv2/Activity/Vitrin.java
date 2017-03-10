@@ -42,13 +42,10 @@ public class Vitrin extends BaseActivity {
         super.onContentChanged();
 
         recyclerView = (RecyclerView)findViewById(R.id.bookList);
-
-
     }
 
 
     public void getBookData(){
-
         ApiClientInterface apiService =
                 ApiClient.getClient().create(ApiClientInterface.class);
 

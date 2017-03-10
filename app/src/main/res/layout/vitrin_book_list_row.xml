@@ -19,7 +19,7 @@
         android:id="@+id/bookName"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:layout_alignParentTop="true"/>
     <TextView
         android:layout_width="match_parent"

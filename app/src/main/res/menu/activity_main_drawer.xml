@@ -30,6 +30,13 @@
             android:id="@+id/nav_kayit"
             android:icon="@drawable/ayarlar"
             android:title="Kayıt Ol"/>
+<<<<<<< HEAD
+=======
+        <item
+            android:id="@+id/nav_cikis"
+            android:icon="@drawable/ayarlar"
+            android:title="Çıkış Yap"/>
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
     </group>
 
 

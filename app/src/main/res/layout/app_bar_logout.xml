@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="heybook.team1.com.heybookv2.Activity.Register">
+    tools:context="heybook.team1.com.heybookv2.Activity.Logout">
 
-<<<<<<< HEAD
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,10 +20,8 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-=======
->>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
 
-    <include layout="@layout/content_register" />
+    <include layout="@layout/content_logout" />
 
 
 

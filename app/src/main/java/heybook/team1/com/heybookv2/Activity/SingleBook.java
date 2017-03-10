@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -32,10 +33,12 @@ import retrofit2.Response;
 
 public class SingleBook extends BaseActivity {
     private ImageView coverPhoto;
+    private ImageView playPreListen;
     private TextView description;
-    private ImageView playPause;
-    private MediaPlayer mediaPlayer;
-    private Button listenButton;
+    private TextView singleBookAuthor;
+    private TextView singleBookPrice;
+    private TextView loggedUser;
+    private Button buyButton;
 
 
     @Override
@@ -43,7 +46,27 @@ public class SingleBook extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_book);
 
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
+                int num = sharedPreferences.getInt("isLogged",0);
+
+                if(num==0){
+                    Toast.makeText(getApplicationContext(),
+                            "Satın alabilme işlemini gerçekleştirebilmeniz için giriş yapmanız gerekmektedir.",
+                            Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(SingleBook.this,Login.class));
+                }else{
+
+                    Toast.makeText(getApplicationContext(),
+                            "Satın Alma ekranı",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         getBookDetail();
+
     }
 
 
@@ -53,7 +76,16 @@ public class SingleBook extends BaseActivity {
 
         coverPhoto = (ImageView) findViewById(R.id.coverPhoto);
         description = (TextView) findViewById(R.id.description);
+<<<<<<< HEAD
         //listenButton = (Button)findViewById(R.id.listenButton);
+=======
+        singleBookAuthor = (TextView)findViewById(R.id.singleBookAuthor);
+        singleBookPrice = (TextView)findViewById(R.id.singleBookPrice);
+        buyButton = (Button)findViewById(R.id.buy);
+        playPreListen = (ImageView)findViewById(R.id.playPreListen);
+        loggedUser = (TextView)findViewById(R.id.loggedUserName);
+
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
 
     }
 
@@ -73,11 +105,14 @@ public class SingleBook extends BaseActivity {
                 final int pos = intent.getIntExtra("Position",0);
 
                 Glide.with(SingleBook.this)
-                            .load(data.get(pos).getThumb())
+                            .load(data.get(pos).getPhoto())
                             .into(coverPhoto);
-                    description.setText(data.get(pos).getDescription());
+                description.setText(data.get(pos).getDescription());
+                singleBookAuthor.setText("Yazar: " + data.get(pos).getAuthor_title());
+                singleBookPrice.setText("Fiyat: "+data.get(pos).getPrice());
                     getSupportActionBar().setTitle(data.get(pos).getBook_title());
 
+<<<<<<< HEAD
                /* listenButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -105,6 +140,28 @@ public class SingleBook extends BaseActivity {
 
 
 
+=======
+
+                playPreListen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final MediaPlayer mp = new MediaPlayer();
+                        try {
+                            mp.setDataSource(data.get(pos).getAudio());
+                            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mediaPlayer) {
+                                    mp.start();
+                                }
+                            });
+                            mp.prepareAsync();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
             }
 
             @Override
@@ -113,5 +170,6 @@ public class SingleBook extends BaseActivity {
             }
         });
     }
+
 
 }

@@ -5,29 +5,55 @@
     android:id="@+id/content_single_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/register_bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_single_book"
     tools:context="heybook.team1.com.heybookv2.Activity.SingleBook"
     >
 
+<<<<<<< HEAD
+=======
+    <TextView
+        android:id="@+id/singleBookAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"
+        android:layout_toRightOf="@+id/coverPhoto"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:id="@+id/singleBookPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"
+        android:layout_toRightOf="@id/coverPhoto"
+        android:layout_below="@+id/singleBookAuthor"
+        android:layout_margin="20dp"/>
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/summary"
-        android:text="Özet: "
+        android:text="@string/summary"
         android:layout_below="@+id/coverPhoto"
-        android:textColor="#F00"
-        android:layout_marginLeft="5dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/description"
+<<<<<<< HEAD
         android:layout_marginLeft="5dp"
         android:layout_margin="10dp"
         android:textColor="#000"
         android:textStyle="bold|italic"
         android:layout_below="@+id/summary"/>
+=======
+        android:layout_below="@+id/summary"
+        android:textColor="#FFF"
+        />
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -42,6 +68,7 @@
         android:text="@string/add_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:id="@+id/checkBox"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/description"
@@ -69,6 +96,43 @@
         android:layout_alignBottom="@+id/buttonBuy"
         android:layout_alignLeft="@+id/checkBox"
         android:layout_alignStart="@+id/checkBox" />
+=======
+        android:id="@+id/buy"
+        android:background="#FFF"
+        android:text="@string/buy"
+        android:layout_marginBottom="71dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addToChart"
+        android:background="#FFF"
+        android:text="@string/add_to_chart"
+        android:layout_alignBaseline="@+id/buy"
+        android:layout_alignBottom="@+id/buy"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/coverPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/playPreListen"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_toRightOf="@id/singleBookAuthor"
+        android:layout_margin="40dp"
+        android:src="@drawable/icons_play"
+        />
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
 
 
 </RelativeLayout>

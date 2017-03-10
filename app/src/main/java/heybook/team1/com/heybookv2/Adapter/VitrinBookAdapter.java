@@ -102,7 +102,6 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
             int pos = this.getAdapterPosition();
             intent.putExtra("Position",pos);
             context.startActivity(intent);
-            Log.d("Position",String.valueOf(pos));
         }
     }
 

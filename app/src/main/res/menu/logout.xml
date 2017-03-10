@@ -2,11 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-<<<<<<< HEAD
         android:id="@+id/action_settings"
-=======
-        android:id="@+id/action_register"
->>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />

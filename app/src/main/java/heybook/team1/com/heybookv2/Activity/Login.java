@@ -52,6 +52,12 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
     public void getUser(){
         ApiClientInterface apiService =
                 ApiClient.getClient().create(ApiClientInterface.class);
@@ -70,7 +76,12 @@ public class Login extends AppCompatActivity {
                         String username = userName.getText().toString();
                         String pw = password.getText().toString();
                         for(int i=0;i<userData.size();i++){
+<<<<<<< HEAD
                             if(userData.get(i).getUser_title().equals(username) && userData.get(i).getPassword().equals(pw)){
+=======
+                            if(userData.get(i).getUser_title().equals(username)
+                                    && userData.get(i).getPassword().equals(pw)){
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
                                 SharedPreferences sharedPreferences = getSharedPreferences("data",MODE_PRIVATE);
                                 int num = sharedPreferences.getInt("isLogged",0);
                                 if(num == 0){
@@ -85,6 +96,7 @@ public class Login extends AppCompatActivity {
                                     startActivity(intent);
                                 }
 
+<<<<<<< HEAD
                             }else{
                                 Toast.makeText(getApplicationContext(),
                                         "Girdiğiniz bilgilere ait kullanıcı bulunamadı.",
@@ -98,14 +110,18 @@ public class Login extends AppCompatActivity {
                         if(userData.get(0).getUser_title().equals(username) && userData.get(0).getPassword().equals(pw)){
                             Log.d("Login","Success");
 
+=======
+                            }
+
+>>>>>>> 4ebd18eb3a4b0fc156fc192f9a36e3fcfd0b7490
                         }
+
             }
 
 
         });
 
     }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
