@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -23,6 +24,7 @@ import heybook.team1.com.heybookv2.R;
 import heybook.team1.com.heybookv2.SessionManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import heybook.team1.com.heybookv2.API.ApiClient;
@@ -56,6 +58,11 @@ public class SingleBook extends BaseActivity {
 
     private boolean isPlaying = false;
 
+    private int pos=0;
+
+    private ArrayList<Data> favoriteBooksList;
+    private List<Data> data;
+
     SessionManager sessionManager;
     MediaPlayer mp = new MediaPlayer();
 
@@ -67,20 +74,14 @@ public class SingleBook extends BaseActivity {
 
         sessionManager = new SessionManager(getApplicationContext());
 
-       /* buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!sessionManager.isLoggedIn()) {
-                    Toast.makeText(getApplicationContext(),
-                            "Satın alabilme işlemini gerçekleştirebilmeniz için giriş yapmanız gerekmektedir.",
-                            Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(SingleBook.this, Login.class));
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Satın Alma ekranı", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
+        Intent intent = getIntent();
+        pos = intent.getIntExtra("Position", 0);
+
+       favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                favoriteBooksList.add(data.get(pos));
+           }
+       });
 
 
         getBookDetail();
@@ -147,10 +148,8 @@ public class SingleBook extends BaseActivity {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
                 final Book book = response.body();
-                final List<Data> data = book.getData();
+                data = book.getData();
 
-                Intent intent = getIntent();
-                final int pos = intent.getIntExtra("Position", 0);
 
                 Glide.with(SingleBook.this)
                         .load(data.get(pos).getPhoto())

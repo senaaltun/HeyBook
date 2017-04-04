@@ -190,6 +190,8 @@ public class BaseActivity extends AppCompatActivity
             startActivity(new Intent(BaseActivity.this,Login.class));
         } else if( id == R.id.nav_cat){
             startActivity(new Intent(BaseActivity.this,Category.class));
+        } else if(id == R.id.fav){
+            startActivity(new Intent(BaseActivity.this,Favorites.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
