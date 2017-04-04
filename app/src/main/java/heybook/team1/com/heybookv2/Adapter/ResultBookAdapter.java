@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import heybook.team1.com.heybookv2.R;
 import java.util.ArrayList;
 
 import heybook.team1.com.heybookv2.Activity.SingleBook;
 import heybook.team1.com.heybookv2.Model.Data;
-import heybook.team1.com.heybookv2.R;
 
 /**
  * Created by Sena Altun on 29.01.2017.

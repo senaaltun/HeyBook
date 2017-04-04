@@ -10,25 +10,38 @@
     tools:context="heybook.team1.com.heybookv2.Activity.Register"
     tools:showIn="@layout/app_bar_register">
 
-    <EditText
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:id="@+id/heybookLogo"
+        android:src="@drawable/logob"
+        android:layout_above="@+id/mail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp" />
+
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/user"
         android:hint="Kullanıcı Adı"
-        android:layout_below="@+id/registerTextView"
+        android:textColorHint="#FFF"
+        android:textColor="#FFF"
+        android:id="@+id/regUserName"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="109dp"
-        android:id="@+id/regUserName" />
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mail"
-        android:layout_below="@id/regUserName"
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
         android:drawableLeft="@drawable/email"
-        />
+        android:layout_below="@+id/regUserName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -36,20 +49,20 @@
         android:inputType="textPassword"
         android:ems="10"
         android:hint="Parola"
+        android:textColor="#FFF"
         android:drawableLeft="@drawable/password"
+        android:id="@+id/passwordRegister"
+        android:textColorHint="#FFF"
         android:layout_below="@+id/mail"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/passwordRegister"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register_button"
-        android:background="#F36"
+        android:background="#F00"
         android:layout_below="@+id/passwordRegister"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -57,18 +70,24 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/registerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="60dp" />
+        android:layout_below="@id/registerButton"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFF"
+        android:text="@string/giris_yap"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forgetPassword"
+        android:text="@string/forget_password"
+        android:layout_below="@+id/registerButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFF"
+        />
 
 
 </RelativeLayout>

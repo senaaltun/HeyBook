@@ -28,12 +28,22 @@
             android:title="Ayarlar" />
         <item
             android:id="@+id/nav_kayit"
-            android:icon="@drawable/ayarlar"
+            android:icon="@drawable/giris_yap_kayit_ol"
             android:title="Kayıt Ol"/>
         <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/giris_yap_kayit_ol"
+            android:title="Giriş Yap"
+            />
+        <item
             android:id="@+id/nav_cikis"
-            android:icon="@drawable/ayarlar"
+            android:icon="@drawable/cikis_yap"
             android:title="Çıkış Yap"/>
+
+        <item
+            android:id="@+id/nav_cat"
+            android:icon="@drawable/category_ic"
+            android:title="Kategoriler"/>
     </group>
 
 

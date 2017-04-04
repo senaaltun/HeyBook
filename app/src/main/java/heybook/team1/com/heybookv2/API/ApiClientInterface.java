@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
- * Created by Nokta on 2.01.2017.
+ * Created by Sena Altun on 2.01.2017.
  */
 
 public interface ApiClientInterface {
@@ -27,8 +27,8 @@ public interface ApiClientInterface {
 
     // Login Request
     @FormUrlEncoded
-    @POST("/test.php")
-    Call<String> setUser(@Field("user_title") String user_title,
+    @POST("/api.php?request=register")
+    Call<RegisterModel> setUser(@Field("user_title") String user_title,
                                 @Field("mail") String mail,
                                 @Field("password") String password);
 

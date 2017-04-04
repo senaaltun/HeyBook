@@ -6,8 +6,10 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/hb_icon"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -49,6 +51,14 @@
         <activity
             android:name=".Activity.Logout"
             android:label="@string/title_activity_logout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Settings"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.Category"
+            android:label="@string/title_activity_category"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

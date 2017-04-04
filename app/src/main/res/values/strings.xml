@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Ayarlar</string>
     <string name="title_activity_vitrin">Heybook! Vitrin</string>
     <string name="vitrin_kitaplar">Kitap Listesi</string>
     <string name="title_activity_single_book">SingleBook</string>
@@ -21,10 +21,21 @@
     <string name="title_activity_search_result">SearchResult</string>
     <string name="add_favorites">Favorilere Ekle</string>
     <string name="buy">Satın Al</string>
-    <string name="title_activity_register">Register</string>
+    <string name="title_activity_register">Kayıt Ol</string>
     <string name="register">Kayıt Ol</string>
-    <string name="register_button">Gönder</string>
+    <string name="register_button">Kayıt Ol</string>
     <string name="add_to_chart">Sepete Ekle</string>
     <string name="summary">Özet</string>
-    <string name="title_activity_logout">Logout</string>
+    <string name="title_activity_logout">Çıkış Yap</string>
+    <string name="already_login">Zaten bir hesabın var mı? Giriş yap</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="save_settings">Bilgileri Kaydet</string>
+    <string name="abone">EPOSTA BÜLTENİNE ABONE OL</string>
+    <string name="sighted_mode">GÖRME ENGELLİ MODU</string>
+    <string name="updateProfile">Güncelle</string>
+    <string name="giris_yap">Giriş Yap</string>
+    <string name="forget_password">Parolamı unuttum</string>
+    <string name="favorilere_ekle">Favorilere Ekle</string>
+    <string name="title_activity_category">Category</string>
+    <string name="category">Kategoriler</string>
 </resources>

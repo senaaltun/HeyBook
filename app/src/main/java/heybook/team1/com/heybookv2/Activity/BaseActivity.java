@@ -3,14 +3,13 @@ package heybook.team1.com.heybookv2.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,16 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import heybook.team1.com.heybookv2.R;
 import java.util.ArrayList;
 import java.util.List;
 
 import heybook.team1.com.heybookv2.API.ApiClient;
 import heybook.team1.com.heybookv2.API.ApiClientInterface;
-import heybook.team1.com.heybookv2.Adapter.ResultBookAdapter;
-import heybook.team1.com.heybookv2.Adapter.VitrinBookAdapter;
 import heybook.team1.com.heybookv2.Model.Book;
 import heybook.team1.com.heybookv2.Model.Data;
-import heybook.team1.com.heybookv2.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,12 +36,13 @@ import retrofit2.Response;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ArrayList<Data> resultDataList;
+    private SearchView searchView;
+    public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
     }
@@ -78,14 +76,15 @@ public class BaseActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(final String query) {
@@ -102,22 +101,23 @@ public class BaseActivity extends AppCompatActivity
                         resultDataList = new ArrayList<>();
 
 
-                        for(int i = 0;i<data.size();i++){
-                            if(data.get(i).getBook_title().equalsIgnoreCase(query)
-                                    || data.get(i).getBook_title().startsWith(query)){
+                        for (int i = 0; i < data.size(); i++) {
+                            if (data.get(i).getBook_title().equalsIgnoreCase(query)
+                                    || data.get(i).getBook_title().startsWith(query)) {
                                 resultDataList.add(data.get(i));
                             }
                         }
-                        if(resultDataList.size() == 0){
+                        if (resultDataList.size() == 0) {
                             Toast.makeText(getApplicationContext(),
-                                    "Aradığınız kriterlere uygun kitap bulunamadı.",Toast.LENGTH_SHORT).show();
-                        }else {
+                                    "Aradığınız kriterlere uygun kitap bulunamadı.", Toast.LENGTH_SHORT).show();
+                        } else {
                             Intent intent = new Intent(BaseActivity.this, SearchResult.class);
                             intent.putExtra("resultDataList", resultDataList);
                             startActivity(intent);
                         }
 
                     }
+
                     @Override
                     public void onFailure(Call<Book> call, Throwable t) {
                         Log.e("MyApp", "onFailure: " + t.toString());
@@ -136,7 +136,10 @@ public class BaseActivity extends AppCompatActivity
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -148,13 +151,18 @@ public class BaseActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_mic) {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                    "Lütfen sesli bir komut verin : ");
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"tr-TR");
+            startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
         }
-
-
-
-
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -168,16 +176,20 @@ public class BaseActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_favorilerim) {
 
-        }else if (id == R.id.nav_sepet){
+        } else if (id == R.id.nav_sepet) {
 
-        }else if (id == R.id.nav_gecmis){
+        } else if (id == R.id.nav_gecmis) {
 
-        }else if (id == R.id.nav_ayarlar){
-
-        }else if(id == R.id.nav_kayit){
-            startActivity(new Intent(BaseActivity.this,Register.class));
-        }else if(id == R.id.nav_cikis){
-            startActivity(new Intent(BaseActivity.this,Logout.class));
+        } else if (id == R.id.nav_ayarlar) {
+            startActivity(new Intent(BaseActivity.this,Settings.class));
+        } else if (id == R.id.nav_kayit) {
+            startActivity(new Intent(BaseActivity.this, Register.class));
+        } else if (id == R.id.nav_cikis) {
+            startActivity(new Intent(BaseActivity.this, Logout.class));
+        } else if( id == R.id.nav_login){
+            startActivity(new Intent(BaseActivity.this,Login.class));
+        } else if( id == R.id.nav_cat){
+            startActivity(new Intent(BaseActivity.this,Category.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -185,4 +197,17 @@ public class BaseActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+            if(matches.contains("vitrin")){
+                startActivity(new Intent(BaseActivity.this,Vitrin.class));
+            }else if(matches.contains("kayıt ol")){
+                startActivity(new Intent(BaseActivity.this,Register.class));
+            }
+
+        }
+    }
 }

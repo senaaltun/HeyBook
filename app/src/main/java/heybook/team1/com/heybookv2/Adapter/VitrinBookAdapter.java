@@ -2,29 +2,21 @@ package heybook.team1.com.heybookv2.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
+import heybook.team1.com.heybookv2.R;
 import java.util.ArrayList;
 
 import heybook.team1.com.heybookv2.Activity.SingleBook;
 import heybook.team1.com.heybookv2.Model.Data;
-import heybook.team1.com.heybookv2.R;
 
 /**
  * Created by Nokta on 7.01.2017.

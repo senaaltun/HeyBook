@@ -5,83 +5,171 @@
     android:id="@+id/content_single_book"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register_bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_single_book"
     tools:context="heybook.team1.com.heybookv2.Activity.SingleBook"
     >
 
-    <TextView
-        android:id="@+id/singleBookAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textStyle="bold|italic"
-        android:layout_toRightOf="@+id/coverPhoto"
-        android:layout_margin="20dp"/>
-
-    <TextView
-        android:id="@+id/singleBookPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textStyle="bold|italic"
-        android:layout_toRightOf="@id/coverPhoto"
-        android:layout_below="@+id/singleBookAuthor"
-        android:layout_margin="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/summary"
-        android:text="@string/summary"
-        android:layout_below="@+id/coverPhoto"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/description"
-        android:layout_below="@+id/summary"
-        android:textColor="#FFF"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buy"
-        android:background="#FFF"
-        android:text="@string/buy"
-        android:layout_marginBottom="71dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addToChart"
-        android:background="#FFF"
-        android:text="@string/add_to_chart"
-        android:layout_alignBaseline="@+id/buy"
-        android:layout_alignBottom="@+id/buy"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:id="@+id/coverPhoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        />
-
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/coverRootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_02"
+        >
+        <TextView
+            android:id="@+id/singleBookName"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/coverPhoto"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+        <TextView
+            android:id="@+id/singleBookAuthor"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/singleBookName"
+            android:layout_alignLeft="@+id/singleBookName"
+            android:layout_alignStart="@+id/singleBookName" />
+        <ImageView
+            android:id="@+id/coverPhoto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="38dp" />
+    </RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/playPreListen"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_toRightOf="@id/singleBookAuthor"
-        android:layout_margin="40dp"
-        android:src="@drawable/icons_play"
-        />
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/play"
+        android:layout_marginTop="147dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:id="@+id/contentRoot"
+        android:layout_margin="8dp"
+        android:layout_below="@id/coverRootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/summary"
+            android:text="@string/summary"
+            android:textColor="#000"
+            />
+        <ScrollView
+            android:id="@+id/summaryScrollView"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_below="@+id/summary"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:maxLines="5"
+                    />
+
+                <ImageButton
+                    android:id="@+id/show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/description_text"
+                    android:background="@drawable/arrow_down"
+                    android:clickable="true" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/description_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/show"
+                    android:background="#000" />
+
+                <ImageButton
+                    android:id="@+id/hide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/description_text"
+                    android:background="@drawable/arrow_up"
+                    android:clickable="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addToFav"
+            android:text="@string/favorilere_ekle"
+            android:layout_below="@+id/summaryScrollView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="42dp" />
+
+        <Switch
+            android:id="@+id/fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/addToFav"
+            android:layout_alignBottom="@+id/addToFav"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/singleBookPrice"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="37dp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/addToChart"
+            android:background="#cd2122"
+            android:text="@string/add_to_chart"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+
+
+
 
 
 </RelativeLayout>

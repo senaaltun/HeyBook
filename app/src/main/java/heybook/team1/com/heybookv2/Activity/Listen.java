@@ -1,26 +1,12 @@
 package heybook.team1.com.heybookv2.Activity;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -29,17 +15,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import heybook.team1.com.heybookv2.R;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import heybook.team1.com.heybookv2.API.ApiClient;
 import heybook.team1.com.heybookv2.API.ApiClientInterface;
-import heybook.team1.com.heybookv2.Adapter.VitrinBookAdapter;
 import heybook.team1.com.heybookv2.Model.Book;
 import heybook.team1.com.heybookv2.Model.Data;
-import heybook.team1.com.heybookv2.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
