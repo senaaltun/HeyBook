@@ -24,7 +24,7 @@
         android:name=".Activity.SingleBook"
         android:label="@string/title_activity_single_book"
         android:theme="@style/AppTheme.NoActionBar"/>
-    <activity android:name=".Activity.Login"/>
+    <activity android:name=".Activity.LoginActivity"/>
     <activity
         android:name=".Activity.Listen"
         android:label="@string/title_activity_listen"

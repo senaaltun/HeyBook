@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import heybook.team1.com.heybookv2.Model.Favorite;
 import heybook.team1.com.heybookv2.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +176,7 @@ public class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_kitaplarım) {
 
         } else if (id == R.id.nav_favorilerim) {
-
+            startActivity(new Intent(BaseActivity.this, Favorites.class));
         } else if (id == R.id.nav_sepet) {
 
         } else if (id == R.id.nav_gecmis) {
@@ -187,7 +188,7 @@ public class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_cikis) {
             startActivity(new Intent(BaseActivity.this, Logout.class));
         } else if( id == R.id.nav_login){
-            startActivity(new Intent(BaseActivity.this,Login.class));
+            startActivity(new Intent(BaseActivity.this,LoginActivity.class));
         } else if( id == R.id.nav_cat){
             startActivity(new Intent(BaseActivity.this,Category.class));
         } else if(id == R.id.fav){
@@ -208,6 +209,8 @@ public class BaseActivity extends AppCompatActivity
                 startActivity(new Intent(BaseActivity.this,Vitrin.class));
             }else if(matches.contains("kayıt ol")){
                 startActivity(new Intent(BaseActivity.this,Register.class));
+            } else if(matches.contains("kategoriler")){
+                startActivity(new Intent(BaseActivity.this,Category.class));
             }
 
         }

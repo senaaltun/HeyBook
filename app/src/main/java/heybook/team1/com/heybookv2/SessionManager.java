@@ -3,7 +3,7 @@ package heybook.team1.com.heybookv2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import heybook.team1.com.heybookv2.Activity.Login;
+import heybook.team1.com.heybookv2.Activity.LoginActivity;
 import java.util.HashMap;
 
 /**
@@ -24,6 +24,7 @@ public class SessionManager {
   public static final String KEY_NAME = "name";
   public static final String KEY_PASSWORD = "password";
   public static final String KEY_IMAGE_PATH = "imagePath";
+  public static final String KEY_ID = "userId";
 
   private static final String IS_LOGIN_PROFILE = "IsProfile";
 
@@ -41,6 +42,14 @@ public class SessionManager {
 
     editor.commit();
   }
+  public void createLoginSession(String name,String password,String userID){
+    editor.putBoolean(IS_LOGIN,true);
+    editor.putString(KEY_NAME,name);
+    editor.putString(KEY_PASSWORD,password);
+    editor.putString(KEY_ID,userID);
+
+    editor.commit();
+  }
 
   public HashMap<String,String> getUserDetails(){
     HashMap<String,String> user = new HashMap<>();
@@ -53,7 +62,7 @@ public class SessionManager {
 
   public void checkLogin(){
     if(!this.isLoggedIn()){
-      Intent intent = new Intent( context , Login.class);
+      Intent intent = new Intent( context , LoginActivity.class);
 
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -72,7 +81,7 @@ public class SessionManager {
     editor.clear();
     editor.commit();
 
-    Intent intent = new Intent(context,Login.class);
+    Intent intent = new Intent(context,LoginActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

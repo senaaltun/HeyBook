@@ -36,6 +36,8 @@ public class Favorites extends BaseActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_favorites);
+
+    getFavorites();
   }
 
   @Override public void onContentChanged() {
@@ -57,7 +59,7 @@ public class Favorites extends BaseActivity {
         favoritesData = new ArrayList<>(data);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         favoritesRecyclerView.setLayoutManager(layoutManager);
         favoritesAdapter = new FavoritesAdapter(Favorites.this, favoritesData);
 

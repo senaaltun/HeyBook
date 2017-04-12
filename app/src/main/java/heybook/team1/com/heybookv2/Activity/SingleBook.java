@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import heybook.team1.com.heybookv2.Model.Favorite;
+import heybook.team1.com.heybookv2.Model.RegisterModel;
 import heybook.team1.com.heybookv2.R;
 import heybook.team1.com.heybookv2.SessionManager;
 
@@ -57,11 +60,14 @@ public class SingleBook extends BaseActivity {
     private Switch favButton;
 
     private boolean isPlaying = false;
+    private boolean isFavorite = false;
 
     private int pos=0;
 
     private ArrayList<Data> favoriteBooksList;
     private List<Data> data;
+
+    private String bookID= null;
 
     SessionManager sessionManager;
     MediaPlayer mp = new MediaPlayer();
@@ -72,6 +78,8 @@ public class SingleBook extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_book);
 
+        getSupportActionBar().hide();
+
         sessionManager = new SessionManager(getApplicationContext());
 
         Intent intent = getIntent();
@@ -79,7 +87,19 @@ public class SingleBook extends BaseActivity {
 
        favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                favoriteBooksList.add(data.get(pos));
+                isFavorite = true;
+
+               if(!sessionManager.isLoggedIn()){
+                   Toast.makeText(SingleBook.this,
+                           "Önce giriş yapmanız gerekmektedir.",Toast.LENGTH_SHORT).show();
+                   startActivity(new Intent(SingleBook.this,LoginActivity.class));
+               }else{
+                   setFavorites();
+               }
+
+
+
+
            }
        });
 
@@ -150,6 +170,7 @@ public class SingleBook extends BaseActivity {
                 final Book book = response.body();
                 data = book.getData();
 
+                bookID = data.get(pos).getBook_id();
 
                 Glide.with(SingleBook.this)
                         .load(data.get(pos).getPhoto())
@@ -242,6 +263,31 @@ public class SingleBook extends BaseActivity {
         });*/
 
     }
+
+    public void setFavorites(){
+        ApiClientInterface apiService =
+                ApiClient.getClient().create(ApiClientInterface.class);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String userId = prefs.getString("userId","");
+
+        Call<Favorite> call = apiService.setFavorite(userId,bookID);
+
+        call.enqueue(new Callback<Favorite>() {
+            @Override
+            public void onResponse(Call<Favorite> call, Response<Favorite> response) {
+                Toast.makeText(SingleBook.this,
+                        "Kitap Favorilere eklendi.",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Favorite> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 
 }
