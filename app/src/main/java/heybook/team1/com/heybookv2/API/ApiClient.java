@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private final static String BASE_URL = "http://heybook.online";
+    private final static String BASE_URL = "http://heybook.online/api.php/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(){

@@ -7,10 +7,12 @@ package heybook.team1.com.heybookv2.Model;
 public class VitrinBookEntity {
     public String imageUrl;
     public String title;
+    private String bookId;
 
-    public VitrinBookEntity(String imageUrl, String title){
+    public VitrinBookEntity(String bookId,String imageUrl, String title){
         this.imageUrl = imageUrl;
         this.title = title;
+        this.bookId = bookId;
     }
 
     public String getImageUrl() {
@@ -27,5 +29,13 @@ public class VitrinBookEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 }

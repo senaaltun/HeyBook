@@ -1,6 +1,8 @@
 package heybook.team1.com.heybookv2.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -8,6 +10,22 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import heybook.team1.com.heybookv2.API.ApiClient;
 import heybook.team1.com.heybookv2.API.ApiClientInterface;
@@ -29,11 +47,15 @@ public class Register extends BaseActivity {
         setContentView(R.layout.activity_register);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
-        userTitle = (AutoCompleteTextView)findViewById(R.id.regUserName);
-        userEmail = (AutoCompleteTextView)findViewById(R.id.mail);
-        passwordField = (EditText)findViewById(R.id.passwordRegister);
-        registerButton = (Button)findViewById(R.id.registerButton);
+        userTitle = (AutoCompleteTextView) findViewById(R.id.regUserName);
+        userEmail = (AutoCompleteTextView) findViewById(R.id.mail);
+        passwordField = (EditText) findViewById(R.id.passwordRegister);
+        registerButton = (Button) findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,30 +64,15 @@ public class Register extends BaseActivity {
                 String mail = userEmail.getText().toString();
                 String password = passwordField.getText().toString();
 
-                Log.d("UserTitle",user_title);
-                Log.d("mail",mail);
-                Log.d("password",password);
-
-                final RegisterModel registerUser = new RegisterModel(user_title,mail,password);
-
-
-                ApiClientInterface apiService =
-                        ApiClient.getClient().create(ApiClientInterface.class);
-
-                Call<RegisterModel> call = apiService.setUser(user_title,mail,password);
+                try {
+                    registerUser(user_title,mail,password);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
-                call.enqueue(new Callback<RegisterModel>() {
-                    @Override
-                    public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-                        Toast.makeText(Register.this,"Başarıyla kayıt olundu",Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<RegisterModel> call, Throwable t) {
-
-                    }
-                });
             }
         });
     }
@@ -74,6 +81,76 @@ public class Register extends BaseActivity {
     public void onContentChanged() {
         super.onContentChanged();
 
+    }
+
+    private void registerUser(String userTitle, String mail, String password) throws IOException, JSONException {
+        URL url = new URL("https://heybook.online/api.php");
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        connection.setReadTimeout(10000);
+        connection.setConnectTimeout(15000);
+        connection.setRequestMethod("POST");
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("request", "request");
+        params.put("requestValue", "register");
+        params.put("user_title", userTitle);
+        params.put("mail", mail);
+        params.put("password", password);
+
+        OutputStream os = connection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getQuery(params));
+        writer.flush();
+        writer.close();
+        os.close();
+        connection.connect();
+
+        int responseCode = connection.getResponseCode();
+
+        String book;
+
+        StringBuilder result = new StringBuilder();
+
+        if(responseCode == HttpsURLConnection.HTTP_OK){
+            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+
+            while((book = br.readLine()) != null){
+                result.append(book).append("\n");
+            }
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                JSONObject jsonData = new JSONObject(result.toString());
+                if(jsonData.getString("response").equals("success")){
+                    Toast.makeText(Register.this,"Başarıyla kayıt oldunuz!",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Register.this,Vitrin.class));
+                }else{
+                    Toast.makeText(Register.this,"Bir hata oluştu.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private String getQuery(HashMap<String, String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        if (first)
+            first = false;
+        else
+            result.append("&");
+        result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
+        result.append("=");
+        result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
+        result.append("&");
+        result.append("user_title=" + params.get("user_title"));
+        result.append("&");
+        result.append("mail=" + params.get("mail"));
+        result.append("&");
+        result.append("password="+params.get("password"));
+
+        return result.toString();
     }
 }
 

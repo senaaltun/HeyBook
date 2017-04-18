@@ -54,7 +54,7 @@ public class SessionManager {
   public HashMap<String,String> getUserDetails(){
     HashMap<String,String> user = new HashMap<>();
 
-    user.put(KEY_NAME,sharedPreferences.getString(KEY_NAME,null));
+    user.put(KEY_ID,sharedPreferences.getString(KEY_ID,null));
     user.put(KEY_PASSWORD,sharedPreferences.getString(KEY_PASSWORD,null));
 
     return user;
@@ -97,7 +97,14 @@ public class SessionManager {
     return sharedPreferences.getBoolean(IS_LOGIN_PROFILE,false);
   }
   
+  public void saveFavorite(){
+    editor.putBoolean("isChecked",true);
+    editor.commit();
+  }
 
+  public boolean isFavorite(){
+    return sharedPreferences.getBoolean("isChecked",false);
+  }
 
 
 

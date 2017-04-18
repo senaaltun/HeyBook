@@ -33,8 +33,12 @@ public class Data implements Serializable {
     private String publisher_title;
     private String publisher_books;
 
-
-
+    public Data(String book_id,String book_title, String photo, String author_title) {
+        this.book_title = book_title;
+        this.photo = photo;
+        this.author_title = author_title;
+        this.book_id = book_id;
+    }
 
     public String getBook_id() {
         return book_id;
