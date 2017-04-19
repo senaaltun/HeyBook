@@ -5,27 +5,47 @@ package heybook.team1.com.heybookv2.Model;
  */
 
 public class Favorite{
-    String user_id;
-    String book_id;
+    private String bookName;
+    private String bookAuthor;
+    private String bookDuration;
+    private String bookImage;
 
-    public Favorite(String user_id, String book_id){
-        this.user_id = user_id;
-        this.book_id = book_id;
+    public Favorite(String bookName, String bookAuthor, String bookDuration,String bookImage) {
+        this.bookName = bookName;
+        this.bookAuthor = bookAuthor;
+        this.bookDuration = bookDuration;
+        this.bookImage = bookImage;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public String getBook_id() {
-        return book_id;
+    public String getBookAuthor() {
+        return bookAuthor;
     }
 
-    public void setBook_id(String book_id) {
-        this.book_id = book_id;
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public String getBookDuration() {
+        return bookDuration;
+    }
+
+    public void setBookDuration(String bookDuration) {
+        this.bookDuration = bookDuration;
+    }
+
+    public String getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(String bookImage) {
+        this.bookImage = bookImage;
     }
 }

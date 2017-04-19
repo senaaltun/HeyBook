@@ -3,35 +3,70 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     >
 
+
   <TextView
-      android:id="@+id/favBookName"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:textColor="#000"
-      android:textSize="20sp"
+      android:id="@+id/favBookName"
+      android:textSize="14sp"
       android:textStyle="bold"
+      android:textColor="#1D1D26"
+      android:layout_marginLeft="6dp"
+      android:layout_marginBottom="8dp"
+      android:layout_alignParentTop="true"/>
+
+
+  <ImageView
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:id="@+id/iconYazar"
+      android:src="@drawable/yazar"
+      android:layout_below="@+id/favBookName"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentStart="true"
       />
   <TextView
-      android:id="@+id/favBookAuthor"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:id="@+id/favBookAuthor"
       android:layout_below="@+id/favBookName"
-      android:textColor="@color/colorPrimaryDark"
+      android:layout_toEndOf="@+id/iconYazar"
+      android:layout_toRightOf="@+id/iconYazar"
+      android:textColor="#ABABAE"
+      />
+
+  <ImageView
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:id="@+id/iconSure"
+      android:src="@drawable/sure"
+      android:layout_marginLeft="5dp"
+      android:layout_below="@id/favBookName"
+      android:layout_toRightOf="@+id/favBookAuthor"
+
+      />
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/favBookDuration"
+      android:layout_below="@id/favBookName"
+      android:layout_toRightOf="@+id/iconSure"
+      android:layout_marginLeft="5dp"
       />
 
   <ImageView
       android:id="@+id/favBookImage"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:layout_alignParentEnd="true"
       android:layout_alignParentRight="true"
-      android:layout_marginEnd="0dp"
+      android:layout_alignParentEnd="true"
       android:layout_marginRight="0dp"
-      />
-
+      android:layout_marginEnd="0dp" />
 
 </RelativeLayout>

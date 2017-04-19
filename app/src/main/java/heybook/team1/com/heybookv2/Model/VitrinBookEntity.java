@@ -8,11 +8,13 @@ public class VitrinBookEntity {
     public String imageUrl;
     public String title;
     private String bookId;
+    private String bookAuthor;
 
-    public VitrinBookEntity(String bookId,String imageUrl, String title){
+    public VitrinBookEntity(String bookId,String imageUrl, String title, String bookAuthor){
         this.imageUrl = imageUrl;
         this.title = title;
         this.bookId = bookId;
+        this.bookAuthor=bookAuthor;
     }
 
     public String getImageUrl() {
@@ -37,5 +39,13 @@ public class VitrinBookEntity {
 
     public void setBookId(String bookId) {
         this.bookId = bookId;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 }

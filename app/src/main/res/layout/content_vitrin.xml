@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:coverflow="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:background="#FFF">
 
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
         android:id="@+id/coverflow"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        coverflow:coverHeight="@dimen/cover_height"
-        coverflow:coverWidth="@dimen/cover_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        coverflow:coverHeight="120dp"
+        coverflow:coverWidth="90dp"
         coverflow:maxScaleFactor="1.5"
         coverflow:reflectionGap="0px"
         coverflow:rotationThreshold="0.5"
@@ -24,8 +24,25 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/coverflow"
         android:layout_centerVertical="true"
         android:paddingBottom="16dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleLastListened"
+        android:text="@string/last_listened"
+        android:textStyle="bold"
+        android:layout_marginLeft="19dp"
+        android:textColor="#1D1D26"
+        android:layout_below="@+id/title"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lastAddedList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleLastListened"
+        />
 
 </RelativeLayout>

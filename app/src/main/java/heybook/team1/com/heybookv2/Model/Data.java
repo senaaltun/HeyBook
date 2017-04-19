@@ -33,12 +33,15 @@ public class Data implements Serializable {
     private String publisher_title;
     private String publisher_books;
 
-    public Data(String book_id,String book_title, String photo, String author_title) {
+    public Data(String book_id,String book_title, String photo, String author_title,String duration,String price) {
         this.book_title = book_title;
         this.photo = photo;
         this.author_title = author_title;
         this.book_id = book_id;
+        this.duration = duration;
+        this.price = price;
     }
+
 
     public String getBook_id() {
         return book_id;
@@ -239,4 +242,6 @@ public class Data implements Serializable {
     public void setPublisher_books(String publisher_books) {
         this.publisher_books = publisher_books;
     }
+
+
 }

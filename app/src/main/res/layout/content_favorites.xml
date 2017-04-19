@@ -18,10 +18,37 @@
       android:layout_alignParentLeft="true"
       android:layout_alignParentStart="true" />
 
-  <android.support.v7.widget.RecyclerView
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20sp"
+      android:textColor="#FFF"
+      android:text="@string/favoriler"
+      android:layout_above="@+id/categoryName"
+      android:layout_alignLeft="@+id/categoryName"
+      android:layout_alignStart="@+id/categoryName"
+      android:layout_marginLeft="11dp"
+      android:layout_marginStart="11dp"
+      android:layout_marginBottom="42dp"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/categoryName"
+      android:textStyle="bold"
+      android:textSize="14sp"
+      android:layout_marginTop="8dp"
+      android:layout_marginLeft="18dp"
+      android:text="@string/kisisel_gelisim"
       android:layout_below="@+id/coverView"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:layout_below="@+id/categoryName"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
       android:id="@+id/favoritesBookList"
       />
 

@@ -39,4 +39,7 @@
   <string name="title_activity_category">Category</string>
   <string name="category">Kategoriler</string>
   <string name="title_activity_favorites">Favorites</string>
+  <string name="last_listened">SON EKLENENLER</string>
+  <string name="kisisel_gelisim">KİŞİSEL GELİŞİM</string>
+  <string name="favoriler">Favoriler</string>
 </resources>

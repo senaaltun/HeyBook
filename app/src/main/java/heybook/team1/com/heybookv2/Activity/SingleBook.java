@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import heybook.team1.com.heybookv2.HeyBook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,6 +86,9 @@ public class SingleBook extends BaseActivity {
 
     private String bookID = null;
     private String userId;
+    private String bookName;
+    private String bookAuthor;
+    private String bookDuration;
 
     SessionManager sessionManager;
     MediaPlayer mp = new MediaPlayer();
@@ -106,8 +110,6 @@ public class SingleBook extends BaseActivity {
         favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isFavorite = true;
-
                 if (isChecked) {
                     isFavorite = sessionManager.isFavorite();
                 } else {
@@ -122,7 +124,6 @@ public class SingleBook extends BaseActivity {
                 } else {
                     HashMap<String, String> user = sessionManager.getUserDetails();
                     userId = user.get("userId");
-                    Log.d("userId", userId);
                     try {
                         setFavorites(userId, bookID);
                     } catch (IOException e) {
@@ -233,6 +234,9 @@ public class SingleBook extends BaseActivity {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                 JSONObject jsonData = new JSONObject(result.toString());
                 final JSONObject singleData = jsonData.getJSONObject("data");
+                bookName = singleData.getString("book_title");
+                bookAuthor = singleData.getString("author_title");
+                bookDuration = singleData.getString("duration");
 
                 Glide.with(SingleBook.this)
                         .load(singleData.getString("photo"))

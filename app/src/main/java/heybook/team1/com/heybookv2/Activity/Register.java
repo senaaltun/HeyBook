@@ -76,7 +76,6 @@ public class Register extends BaseActivity {
             }
         });
     }
-
     @Override
     public void onContentChanged() {
         super.onContentChanged();

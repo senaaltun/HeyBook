@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.*;
 import android.provider.Settings;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -62,9 +63,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Vitrin extends BaseActivity {
-    private RecyclerView recyclerView;
+    private RecyclerView lastListenedList;
     private VitrinBookAdapter adapter;
-    private ArrayList<Data> dataList;
+    private ArrayList<Data> dataList = new ArrayList<>();
     private ArrayList<VitrinBookEntity> vitrinData = new ArrayList<>();
     private TextSwitcher title;
     private CoverFlowAdapter coverFlowAdapter;
@@ -72,7 +73,7 @@ public class Vitrin extends BaseActivity {
 
     private RequestQueue queue;
 
-    private String bookId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +83,15 @@ public class Vitrin extends BaseActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        queue = Volley.newRequestQueue(this);
         getBookData();
+
+        lastListenedList = (RecyclerView)findViewById(R.id.lastAddedList);
+        adapter = new VitrinBookAdapter(getApplicationContext(),dataList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        lastListenedList.setLayoutManager(layoutManager);
+        lastListenedList.setItemAnimator(new DefaultItemAnimator());
+        lastListenedList.setAdapter(adapter);
+
 
     }
 
@@ -136,17 +144,15 @@ public class Vitrin extends BaseActivity {
                     final JSONArray bookD = jsonData.getJSONArray("data");
                     for(int i=0; i<bookD.length();i++){
                         JSONObject b = (JSONObject) bookD.get(i);
-                        Data bookData = new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"));
-                        vitrinData.add(new VitrinBookEntity(bookData.getBook_id(),bookData.getPhoto(),bookData.getBook_title()));
+                        Data bookData = new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price"));
+                        vitrinData.add(new VitrinBookEntity(bookData.getBook_id(),bookData.getPhoto(),bookData.getBook_title(),bookData.getAuthor_title()));
+                        dataList.add(new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price")));
                     }
 
                     setContentView(R.layout.activity_vitrin);
                     coverFlow = (FeatureCoverFlow) findViewById(R.id.coverflow);
                     coverFlowAdapter = new CoverFlowAdapter(getApplicationContext(), vitrinData);
                     coverFlow.setAdapter(coverFlowAdapter);
-
-
-
 
                     title = (TextSwitcher) findViewById(R.id.title);
                     title.setFactory(new ViewSwitcher.ViewFactory() {
@@ -169,6 +175,7 @@ public class Vitrin extends BaseActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(Vitrin.this, SingleBook.class);
                             intent.putExtra("bookId", vitrinData.get(position).getBookId());
+                            intent.putExtra("bookName",vitrinData.get(position).getTitle());
                             startActivity(intent);
                         }
                     });
@@ -176,7 +183,7 @@ public class Vitrin extends BaseActivity {
                     coverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
                         @Override
                         public void onScrolledToPosition(int position) {
-                            title.setText(vitrinData.get(position).getTitle());
+                            title.setText(vitrinData.get(position).getTitle() + "-" + vitrinData.get(position).getBookAuthor());
                         }
 
                         @Override

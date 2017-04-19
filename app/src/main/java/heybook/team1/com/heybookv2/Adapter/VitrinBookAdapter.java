@@ -27,6 +27,7 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
     private ArrayList<Data> data;
     private Context context;
     private LayoutInflater inflater;
+    private String bookId;
 
 
     public VitrinBookAdapter(Context context,ArrayList<Data> data){
@@ -43,6 +44,7 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
         Data bookData = data.get(position);
         holder.bookName.setText(bookData.getBook_title());
         holder.bookAuthor.setText(bookData.getAuthor_title());
+        holder.bookDuration.setText(bookData.getDuration());
         Glide.with(context)
                 .load(bookData.getPhoto())
                 .into(holder.bookImage);
@@ -55,11 +57,8 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int pos = position;
         Data bookData = data.get(position);
-        Log.d("Book Author",bookData.getAuthor_title());
-
         holder.bookName.setText(bookData.getBook_title());
-        holder.bookAuthor.setText("Yazar: " + bookData.getAuthor_title());
-        holder.price.setText("Fiyat: " + bookData.getPrice()+" TL");
+        holder.bookAuthor.setText(bookData.getAuthor_title());
         Glide.with(holder.bookImage.getContext())
                 .load(bookData.getPhoto())
                 .into(holder.bookImage);
@@ -76,7 +75,7 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView bookName;
         TextView bookAuthor;
-        TextView price;
+        TextView bookDuration;
         ImageView bookImage;
 
         public ViewHolder(View view){
@@ -85,7 +84,7 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
             bookName = (TextView)view.findViewById(R.id.bookName);
             bookAuthor = (TextView)view.findViewById(R.id.bookAuthor);
             bookImage = (ImageView)view.findViewById(R.id.bookImage);
-            price = (TextView)view.findViewById(R.id.price);
+            bookDuration = (TextView)view.findViewById(R.id.bookDuration);
         }
 
         @Override
@@ -93,6 +92,8 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
             Intent intent = new Intent(context,SingleBook.class);
             int pos = this.getAdapterPosition();
             intent.putExtra("Position",pos);
+            intent.putExtra("bookId",bookId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

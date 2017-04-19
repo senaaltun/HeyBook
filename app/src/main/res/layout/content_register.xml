@@ -9,85 +9,117 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="heybook.team1.com.heybookv2.Activity.Register"
     tools:showIn="@layout/app_bar_register">
-
     <ImageView
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:id="@+id/heybookLogo"
         android:src="@drawable/logob"
-        android:layout_above="@+id/mail"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignLeft="@+id/relativeLayout"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:layout_marginBottom="50dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="88dp"
+        android:background="#000"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp" />
+        >
 
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/user"
-        android:hint="Kullanıcı Adı"
-        android:textColorHint="#FFF"
-        android:textColor="#FFF"
-        android:id="@+id/regUserName"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user"
+            android:hint="Kullanıcı Adı"
+            android:textColorHint="#FFF"
+            android:textColor="#FFF"
+            android:id="@+id/regUserName"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <AutoCompleteTextView
-        android:id="@+id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mail"
-        android:textColor="#FFF"
-        android:textColorHint="#FFF"
-        android:drawableLeft="@drawable/email"
-        android:layout_below="@+id/regUserName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <AutoCompleteTextView
+            android:id="@+id/mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mail"
+            android:textColorHint="#FFF"
+            android:textColor="#FFF"
+            android:drawableLeft="@drawable/email"
+            android:layout_below="@+id/regUserName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:hint="Parola"
-        android:textColor="#FFF"
-        android:drawableLeft="@drawable/password"
-        android:id="@+id/passwordRegister"
-        android:textColorHint="#FFF"
-        android:layout_below="@+id/mail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="Parola"
+            android:textColorHint="#FFF"
+            android:textColor="#FFF"
+            android:drawableLeft="@drawable/password"
+            android:id="@+id/passwordRegister"
+            android:layout_below="@+id/mail"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="Parola"
+            android:textColorHint="#FFF"
+            android:textColor="#FFF"
+            android:drawableLeft="@drawable/password"
+            android:id="@+id/passwordSRegister"
+            android:layout_below="@+id/passwordRegister"
+            android:layout_above="@+id/registerButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_button"
-        android:background="#F00"
-        android:layout_below="@+id/passwordRegister"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/register_button"
+            android:background="#F00"
+            android:textColor="#FFF"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/registerButton"
-        android:layout_marginTop="20dp"
         android:textColor="#FFF"
         android:text="@string/giris_yap"
+        android:id="@+id/textView2"
+        android:layout_alignBaseline="@+id/forgetPassword"
+        android:layout_alignBottom="@+id/forgetPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/forgetPassword"
         android:text="@string/forget_password"
-        android:layout_below="@+id/registerButton"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
         android:textColor="#FFF"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="12dp"
         />
+
 
 
 </RelativeLayout>
