@@ -69,6 +69,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/summary"
             android:text="@string/summary"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black"
+            android:textStyle="bold"
+            android:textSize="14sp"
             android:textColor="#000"
             />
         <ScrollView
@@ -163,9 +166,21 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
-
-
     </RelativeLayout>
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?ratingBarStyleSmall"
+        android:numStars="5"
+        android:layout_marginTop="15dp"
+        android:stepSize="1"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/playPreListen"
+        android:layout_below="@+id/coverRootLayout"
+        android:isIndicator="false"
+        />
 
 
 

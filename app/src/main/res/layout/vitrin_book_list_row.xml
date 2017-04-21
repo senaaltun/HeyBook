@@ -38,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bookAuthor"
+        android:textSize="10sp"
         android:layout_below="@+id/bookName"
         android:layout_toEndOf="@+id/iconYazar"
         android:layout_toRightOf="@+id/iconYazar"
@@ -58,9 +59,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bookDuration"
+        android:textColor="#ABABAE"
         android:layout_below="@id/bookName"
         android:layout_toRightOf="@+id/iconSure"
-        android:layout_marginLeft="5dp"
+        android:textSize="10sp"
+        android:layout_marginLeft="3dp"
         />
 
     <ImageView

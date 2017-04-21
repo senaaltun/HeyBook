@@ -1,6 +1,7 @@
 package heybook.team1.com.heybookv2.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,8 @@ public class Settings extends BaseActivity {
   private ImageView addPhoto;
   private SessionManager sessionManager;
 
+  private SharedPreferences sharedPreferences;
+
   private HashMap<String,String> userInfo;
 
   private static final int REQUEST_CODE_PICKER = 100;
@@ -50,7 +53,6 @@ public class Settings extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
 
-
     userProfileImage = (CircleImageView)findViewById(R.id.userProfileImage);
     addPhoto = (ImageView)findViewById(R.id.addPhotoButton);
     userTitle =(EditText)findViewById(R.id.user_title_settings);
@@ -58,6 +60,12 @@ public class Settings extends BaseActivity {
     userPassword = (EditText)findViewById(R.id.password_settings);
     saveSettingsButton = (Button)findViewById(R.id.saveSettings);
 
+    sessionManager = new SessionManager(getApplicationContext());
+    sharedPreferences = getSharedPreferences("HeybookPrefs",0);
+
+    if(sessionManager.isLoggedIn()){
+      userProfileImage.setImageURI(Uri.parse(sharedPreferences.getString("imagePath",null)));
+    }
 
     addPhoto.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
@@ -70,7 +78,6 @@ public class Settings extends BaseActivity {
     saveSettingsButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        sessionManager = new SessionManager(getApplicationContext());
         sessionManager.createLoginSession(userTitle.getText().toString(),userPassword.getText().toString());
 
       }

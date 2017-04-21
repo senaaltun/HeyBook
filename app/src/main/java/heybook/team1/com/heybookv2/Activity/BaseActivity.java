@@ -2,6 +2,7 @@ package heybook.team1.com.heybookv2.Activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
@@ -13,12 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import heybook.team1.com.heybookv2.Model.Favorite;
 import heybook.team1.com.heybookv2.R;
+import heybook.team1.com.heybookv2.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,14 +43,28 @@ import retrofit2.Response;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ArrayList<Data> resultDataList;
+
     private SearchView searchView;
+
+    private SessionManager sessionManager;
+
+    private SharedPreferences sharedPreferences;
+    private ImageView profile;
+
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+
+    private boolean isLoggedProfile=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPreferences = getSharedPreferences("HeybookPrefs",0);
+
+        sessionManager = new SessionManager(getApplicationContext());
+
+        isLoggedProfile = sessionManager.isLoggedProfile();
 
     }
 

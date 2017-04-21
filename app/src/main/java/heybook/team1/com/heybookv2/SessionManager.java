@@ -3,6 +3,7 @@ package heybook.team1.com.heybookv2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import heybook.team1.com.heybookv2.Activity.LoginActivity;
 import java.util.HashMap;
 
@@ -91,6 +92,8 @@ public class SessionManager {
   public void createUserProfileSession(String imagePath){
     editor.putBoolean(IS_LOGIN_PROFILE,true);
     editor.putString(KEY_IMAGE_PATH,imagePath);
+    editor.commit();
+    Log.d("ImagePath: ", sharedPreferences.getString(KEY_IMAGE_PATH,null));
   }
 
   public boolean isLoggedProfile(){

@@ -56,93 +56,103 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SingleBook extends BaseActivity {
-    private ImageView coverPhoto;
-    private ImageView playPreListen;
+  private ImageView coverPhoto;
+  private ImageView playPreListen;
 
-    private TextView description;
-    private TextView singleBookAuthor;
-    private TextView singleBookPrice;
-    private TextView loggedUser;
-    private TextView singleBook;
-    private TextView addToFav;
+  private TextView description;
+  private TextView singleBookAuthor;
+  private TextView singleBookPrice;
+  private TextView loggedUser;
+  private TextView singleBook;
+  private TextView addToFav;
 
-    private Button buyButton;
-    private Button addToChartButton;
+  private Button buyButton;
+  private Button addToChartButton;
 
-    private RatingBar ratingBar;
+  private RatingBar ratingBar;
 
-    private ImageButton show;
-    private ImageButton hide;
+  private ImageButton show;
+  private ImageButton hide;
 
-    private Switch favButton;
+  private Switch favButton;
 
-    private boolean isPlaying = false;
-    private boolean isFavorite = false;
+  private boolean isPlaying = false;
+  private boolean isFavorite = false;
 
-    private int pos = 0;
+  private int pos = 0;
 
-    private ArrayList<Data> favoriteBooksList;
-    private List<Data> data;
+  private ArrayList<Data> favoriteBooksList;
+  private List<Data> data;
 
-    private String bookID = null;
-    private String userId;
-    private String bookName;
-    private String bookAuthor;
-    private String bookDuration;
+  private String bookID = null;
+  private String userId;
+  private String bookName;
+  private String bookAuthor;
+  private String bookDuration;
 
-    SessionManager sessionManager;
-    MediaPlayer mp = new MediaPlayer();
+  SessionManager sessionManager;
+  MediaPlayer mp = new MediaPlayer();
 
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_single_book);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_book);
+    getSupportActionBar().hide();
 
-        getSupportActionBar().hide();
+    sessionManager = new SessionManager(getApplicationContext());
+    HashMap<String, String> user = sessionManager.getUserDetails();
+    userId = user.get("userId");
+    Intent intent = getIntent();
+    pos = intent.getIntExtra("Position", 0);
+    bookID = getIntent().getStringExtra("bookId");
 
-        sessionManager = new SessionManager(getApplicationContext());
-
-        Intent intent = getIntent();
-        pos = intent.getIntExtra("Position", 0);
-        bookID = getIntent().getStringExtra("bookId");
-
-        favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    isFavorite = sessionManager.isFavorite();
-                } else {
-                    favButton.setChecked(true);
-                    sessionManager.saveFavorite();
-                }
-
-                if (!sessionManager.isLoggedIn()) {
-                    Toast.makeText(SingleBook.this,
-                            "Önce giriş yapmanız gerekmektedir.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SingleBook.this, LoginActivity.class));
-                } else {
-                    HashMap<String, String> user = sessionManager.getUserDetails();
-                    userId = user.get("userId");
-                    try {
-                        setFavorites(userId, bookID);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
+    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+      @Override public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        int ratingValue = (int) rating;
         try {
-            getBookDetail();
+          setRating(ratingValue);
         } catch (IOException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         } catch (JSONException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         }
+      }
+    });
+
+    favButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+          isFavorite = sessionManager.isFavorite();
+        } else {
+          favButton.setChecked(true);
+          sessionManager.saveFavorite();
+        }
+
+        if (!sessionManager.isLoggedIn()) {
+          Toast.makeText(SingleBook.this, "Önce giriş yapmanız gerekmektedir.", Toast.LENGTH_SHORT)
+              .show();
+          startActivity(new Intent(SingleBook.this, LoginActivity.class));
+        } else {
+          HashMap<String, String> user = sessionManager.getUserDetails();
+          userId = user.get("userId");
+          try {
+            setFavorites(userId, bookID);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    });
+
+    try {
+      getBookDetail();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
         /*final View contentView = this.findViewById(R.id.content_single_book);
 
         contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -172,242 +182,290 @@ public class SingleBook extends BaseActivity {
             }
         });*/
 
+  }
 
-    }
+  @Override public void onContentChanged() {
+    super.onContentChanged();
 
+    coverPhoto = (ImageView) findViewById(R.id.coverPhoto);
+    description = (TextView) findViewById(R.id.description_text);
+    singleBookAuthor = (TextView) findViewById(R.id.singleBookAuthor);
+    singleBookPrice = (TextView) findViewById(R.id.singleBookPrice);
+    //buyButton = (Button) findViewById(R.id.buy);
+    playPreListen = (ImageView) findViewById(R.id.playPreListen);
+    loggedUser = (TextView) findViewById(R.id.loggedUserName);
+    ratingBar = (RatingBar) findViewById(R.id.rating);
+    addToChartButton = (Button) findViewById(R.id.addToChart);
+    favButton = (Switch) findViewById(R.id.fav);
+    show = (ImageButton) findViewById(R.id.show);
+    hide = (ImageButton) findViewById(R.id.hide);
+    addToFav = (TextView) findViewById(R.id.addToFav);
+    singleBook = (TextView) findViewById(R.id.singleBookName);
+  }
 
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
+  private void getBookDetail() throws IOException, JSONException {
 
-        coverPhoto = (ImageView) findViewById(R.id.coverPhoto);
-        description = (TextView) findViewById(R.id.description_text);
-        singleBookAuthor = (TextView) findViewById(R.id.singleBookAuthor);
-        singleBookPrice = (TextView) findViewById(R.id.singleBookPrice);
-        //buyButton = (Button) findViewById(R.id.buy);
-        playPreListen = (ImageView) findViewById(R.id.playPreListen);
-        loggedUser = (TextView) findViewById(R.id.loggedUserName);
-        //ratingBar = (RatingBar) findViewById(R.id.rating);
-        addToChartButton = (Button) findViewById(R.id.addToChart);
-        favButton = (Switch) findViewById(R.id.fav);
-        show = (ImageButton) findViewById(R.id.show);
-        hide = (ImageButton) findViewById(R.id.hide);
-        addToFav = (TextView) findViewById(R.id.addToFav);
-        singleBook = (TextView) findViewById(R.id.singleBookName);
-    }
+    URL url = new URL("https://heybook.online/api.php");
+    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+    connection.setReadTimeout(10000);
+    connection.setConnectTimeout(15000);
+    connection.setRequestMethod("POST");
+    connection.setDoInput(true);
+    connection.setDoOutput(true);
 
-    public void getBookDetail() throws IOException, JSONException {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("request", "request");
+    params.put("requestValue", "book");
+    params.put("book_id", getIntent().getStringExtra("bookId"));
 
+    OutputStream os = connection.getOutputStream();
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+    writer.write(getQuery(params));
+    writer.flush();
+    writer.close();
+    os.close();
+    connection.connect();
 
-        URL url = new URL("https://heybook.online/api.php");
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setReadTimeout(10000);
-        connection.setConnectTimeout(15000);
-        connection.setRequestMethod("POST");
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
+    int responseCode = connection.getResponseCode();
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("request", "request");
-        params.put("requestValue", "book");
-        params.put("book_id", getIntent().getStringExtra("bookId"));
+    StringBuilder result = new StringBuilder();
 
-        OutputStream os = connection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getQuery(params));
-        writer.flush();
-        writer.close();
-        os.close();
-        connection.connect();
+    if (responseCode == HttpsURLConnection.HTTP_OK) {
+      BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+      String singleBookJson;
+      while ((singleBookJson = br.readLine()) != null) {
+        result.append(singleBookJson).append("\n");
+      }
 
-        int responseCode = connection.getResponseCode();
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+        JSONObject jsonData = new JSONObject(result.toString());
+        final JSONObject singleData = jsonData.getJSONObject("data");
+        bookName = singleData.getString("book_title");
+        bookAuthor = singleData.getString("author_title");
+        bookDuration = singleData.getString("duration");
 
-        StringBuilder result = new StringBuilder();
+        Glide.with(SingleBook.this).load(singleData.getString("photo")).into(coverPhoto);
+        description.setText(singleData.getString("description"));
+        singleBookAuthor.setText(singleData.getString("author_title"));
+        singleBook.setText(singleData.getString("book_title"));
+        singleBookPrice.setText(singleData.getString("price"));
+        getSupportActionBar().setTitle(singleData.getString("book_title"));
 
-        if (responseCode == HttpsURLConnection.HTTP_OK) {
-            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-            String singleBookJson;
-            while ((singleBookJson = br.readLine()) != null) {
-                result.append(singleBookJson).append("\n");
-            }
+        playPreListen.setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View view) {
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                JSONObject jsonData = new JSONObject(result.toString());
-                final JSONObject singleData = jsonData.getJSONObject("data");
-                bookName = singleData.getString("book_title");
-                bookAuthor = singleData.getString("author_title");
-                bookDuration = singleData.getString("duration");
-
-                Glide.with(SingleBook.this)
-                        .load(singleData.getString("photo"))
-                        .into(coverPhoto);
-                description.setText(singleData.getString("description"));
-                singleBookAuthor.setText(singleData.getString("author_title"));
-                singleBook.setText(singleData.getString("book_title"));
-                singleBookPrice.setText(singleData.getString("price"));
-                getSupportActionBar().setTitle(singleData.getString("book_title"));
-
-                playPreListen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        try {
-                            if (isPlaying) {
-                                Glide.with(SingleBook.this)
-                                        .load(R.drawable.play)
-                                        .into(playPreListen);
-                                mp.stop();
-                                mp.reset();
-                                mp.release();
-                            } else {
-                                Glide.with(SingleBook.this)
-                                        .load(R.drawable.pause)
-                                        .into(playPreListen);
-                                mp.setDataSource(singleData.getString("audio"));
-                                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                    @Override
-                                    public void onPrepared(MediaPlayer mediaPlayer) {
-                                        mp.start();
-                                    }
-                                });
-                                mp.prepareAsync();
-                            }
-                            isPlaying = !isPlaying;
-
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
+            try {
+              if (isPlaying) {
+                Glide.with(SingleBook.this).load(R.drawable.play).into(playPreListen);
+                mp.stop();
+                mp.reset();
+                mp.release();
+              } else {
+                Glide.with(SingleBook.this).load(R.drawable.pause).into(playPreListen);
+                mp.setDataSource(singleData.getString("audio"));
+                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                  @Override public void onPrepared(MediaPlayer mediaPlayer) {
+                    mp.start();
+                  }
                 });
-
-                show.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        show.setVisibility(View.INVISIBLE);
-                        hide.setVisibility(View.VISIBLE);
-                        description.setMaxLines(Integer.MAX_VALUE);
-                        try {
-                            description.setText(singleData.getString("description"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        favButton.setVisibility(View.GONE);
-                        addToFav.setVisibility(View.GONE);
-                        singleBookPrice.setVisibility(View.GONE);
-                        addToChartButton.setVisibility(View.GONE);
-                    }
-                });
-
-                hide.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        hide.setVisibility(View.INVISIBLE);
-                        show.setVisibility(View.VISIBLE);
-                        description.setMaxLines(5);
-                        favButton.setVisibility(View.VISIBLE);
-                        addToFav.setVisibility(View.VISIBLE);
-                        singleBookPrice.setText(View.VISIBLE);
-                        addToChartButton.setVisibility(View.VISIBLE);
-                    }
-                });
+                mp.prepareAsync();
+              }
+              isPlaying = !isPlaying;
+            } catch (IOException e) {
+              e.printStackTrace();
+            } catch (JSONException e) {
+              e.printStackTrace();
             }
-        }
+          }
+        });
 
-    }
-
-    public void setFavorites(String userId, String bookID) throws IOException, JSONException {
-        URL url = new URL("https://heybook.online/api.php");
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setReadTimeout(10000);
-        connection.setConnectTimeout(15000);
-        connection.setRequestMethod("POST");
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-        bookID = getIntent().getStringExtra("bookId");
-        Log.d("bookId", bookID);
-        HashMap<String, String> params = new HashMap<>();
-        params.put("request", "request");
-        params.put("requestValue", "user_favorites-add");
-        params.put("user_id", userId);
-        params.put("bookId", bookID);
-
-        OutputStream os = connection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getFavQuery(params));
-        writer.flush();
-        writer.close();
-        os.close();
-        connection.connect();
-
-        int responseCode = connection.getResponseCode();
-
-        StringBuilder result = new StringBuilder();
-
-        if (responseCode == HttpsURLConnection.HTTP_OK) {
-            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-            String singleBookJson;
-            while ((singleBookJson = br.readLine()) != null) {
-                result.append(singleBookJson).append("\n");
+        show.setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View view) {
+            show.setVisibility(View.INVISIBLE);
+            hide.setVisibility(View.VISIBLE);
+            description.setMaxLines(Integer.MAX_VALUE);
+            try {
+              description.setText(singleData.getString("description"));
+            } catch (JSONException e) {
+              e.printStackTrace();
             }
+            favButton.setVisibility(View.GONE);
+            addToFav.setVisibility(View.GONE);
+            singleBookPrice.setVisibility(View.GONE);
+            addToChartButton.setVisibility(View.GONE);
+          }
+        });
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                JSONObject jsonData = new JSONObject(result.toString());
-                Log.d("jsonData", jsonData.toString());
+        hide.setOnClickListener(new View.OnClickListener() {
+          @Override public void onClick(View view) {
+            hide.setVisibility(View.INVISIBLE);
+            show.setVisibility(View.VISIBLE);
+            description.setMaxLines(5);
+            favButton.setVisibility(View.VISIBLE);
+            addToFav.setVisibility(View.VISIBLE);
+            singleBookPrice.setText(View.VISIBLE);
+            addToChartButton.setVisibility(View.VISIBLE);
+          }
+        });
+      }
+    }
+  }
 
-                if (jsonData.getString("response").equals("success")) {
-                    Toast.makeText(SingleBook.this,
-                            jsonData.getString("message"), Toast.LENGTH_SHORT);
-                }
-            }
+  private void setFavorites(String userId, String bookID) throws IOException, JSONException {
+    URL url = new URL("https://heybook.online/api.php");
+    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+    connection.setReadTimeout(10000);
+    connection.setConnectTimeout(15000);
+    connection.setRequestMethod("POST");
+    connection.setDoInput(true);
+    connection.setDoOutput(true);
+    bookID = getIntent().getStringExtra("bookId");
+    Log.d("bookId", bookID);
+    HashMap<String, String> params = new HashMap<>();
+    params.put("request", "request");
+    params.put("requestValue", "user_favorites-add");
+    params.put("user_id", userId);
+    params.put("bookId", bookID);
+
+    OutputStream os = connection.getOutputStream();
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+    writer.write(getFavQuery(params));
+    writer.flush();
+    writer.close();
+    os.close();
+    connection.connect();
+
+    int responseCode = connection.getResponseCode();
+
+    StringBuilder result = new StringBuilder();
+
+    if (responseCode == HttpsURLConnection.HTTP_OK) {
+      BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+      String singleBookJson;
+      while ((singleBookJson = br.readLine()) != null) {
+        result.append(singleBookJson).append("\n");
+      }
+
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+        JSONObject jsonData = new JSONObject(result.toString());
+        Log.d("jsonData", jsonData.toString());
+
+        if (jsonData.getString("response").equals("success")) {
+          Toast.makeText(SingleBook.this, jsonData.getString("message"), Toast.LENGTH_SHORT);
         }
+      }
+    }
+  }
+
+  private String getQuery(HashMap<String, String> params) throws UnsupportedEncodingException {
+    StringBuilder result = new StringBuilder();
+    boolean first = true;
+
+    for (int i = 0; i < params.size(); i++) {
+      if (first) {
+        first = false;
+      } else {
+        result.append("&");
+      }
+      result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
+      result.append("=");
+      result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
+      result.append("&");
+      result.append("book_id=");
+      result.append(bookID);
     }
 
-    private String getQuery(HashMap<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
+    return result.toString();
+  }
 
-        for (int i = 0; i < params.size(); i++) {
-            if (first)
-                first = false;
-            else
-                result.append("&");
-            result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
-            result.append("&");
-            result.append("book_id=");
-            result.append(bookID);
-        }
+  private String getFavQuery(HashMap<String, String> params) throws UnsupportedEncodingException {
+    StringBuilder result = new StringBuilder();
+    boolean first = true;
 
-        return result.toString();
+    for (int i = 0; i < params.size(); i++) {
+      if (first) {
+        first = false;
+      } else {
+        result.append("&");
+      }
+      result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
+      result.append("=");
+      result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
+      result.append("&");
+      result.append("user_id=");
+      result.append(params.get("user_id"));
+      result.append("&");
+      result.append("book_id=");
+      result.append(params.get("bookId"));
     }
 
-    private String getFavQuery(HashMap<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
+    return result.toString();
+  }
 
-        for (int i = 0; i < params.size(); i++) {
-            if (first)
-                first = false;
-            else
-                result.append("&");
-            result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
-            result.append("&");
-            result.append("user_id=");
-            result.append(params.get("user_id"));
-            result.append("&");
-            result.append("book_id=");
-            result.append(params.get("bookId"));
-        }
+  private void setRating(int rating) throws IOException, JSONException {
+    URL url = new URL("https://heybook.online/api.php");
+    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+    connection.setReadTimeout(10000);
+    connection.setConnectTimeout(15000);
+    connection.setRequestMethod("POST");
+    connection.setDoInput(true);
+    connection.setDoOutput(true);
 
-        return result.toString();
+    HashMap<String, String> params = new HashMap<>();
+    params.put("request", "request");
+    params.put("requestValue", "user_stars-add");
+    params.put("user_id", userId);
+    params.put("book_id", bookID);
+    params.put("star", String.valueOf(rating));
+
+    OutputStream os = connection.getOutputStream();
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+    writer.write(getRating(params));
+    writer.flush();
+    writer.close();
+    os.close();
+    connection.connect();
+
+    int responseCode = connection.getResponseCode();
+
+    StringBuilder result = new StringBuilder();
+
+    if (responseCode == HttpsURLConnection.HTTP_OK) {
+      BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+      String singleBookJson;
+      while ((singleBookJson = br.readLine()) != null) {
+        result.append(singleBookJson).append("\n");
+      }
+
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+        JSONObject jsonData = new JSONObject(result.toString());
+        Log.d("jsonData",jsonData.toString());
+      }
     }
+  }
 
+  private String getRating(HashMap<String, String> params) throws UnsupportedEncodingException {
+    StringBuilder result = new StringBuilder();
+    boolean first = true;
 
+    if (first) {
+      first = false;
+    } else {
+      result.append("&");
+    }
+    result.append(URLEncoder.encode(params.get("request"), "UTF-8"));
+    result.append("=");
+    result.append(URLEncoder.encode(params.get("requestValue"), "UTF-8"));
+    result.append("&");
+    result.append("user_id=");
+    result.append(userId);
+    result.append("&");
+    result.append("book_id=");
+    result.append(bookID);
+    result.append("&");
+    result.append("star=");
+    result.append(params.get("star"));
+
+    return result.toString();
+  }
 }
