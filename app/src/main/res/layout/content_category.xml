@@ -51,7 +51,7 @@
                 android:text="Türk Edebiyatı Klasikleri" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/categoryRecyclerView"
+                android:id="@+id/classicsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/categorySelectionButton"
@@ -68,6 +68,73 @@
                 android:id="@+id/scienceRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Tarih" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/historyRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Macera" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/adventureRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Korku" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fearRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Kişisel Gelişim" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/personalDevelopmentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Roman" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/novalRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:text="Öykü" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fableRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </ScrollView>
