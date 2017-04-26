@@ -32,8 +32,17 @@ public class Data implements Serializable {
     private String narrator_books;
     private String publisher_title;
     private String publisher_books;
+    private String star;
 
-    public Data(String book_id,String book_title, String photo, String author_title,String duration,String price, String category_title) {
+    public String getStar() {
+        return star;
+    }
+
+    public void setStar(String star) {
+        this.star = star;
+    }
+
+    public Data(String book_id, String book_title, String photo, String author_title, String duration, String price, String category_title) {
         this.book_title = book_title;
         this.photo = photo;
         this.author_title = author_title;
@@ -42,6 +51,17 @@ public class Data implements Serializable {
         this.price = price;
         this.category_title=category_title;
     }
+    public Data(String book_id,String book_title, String photo, String author_title,String duration,String price, String category_title,String star) {
+        this.book_title = book_title;
+        this.photo = photo;
+        this.author_title = author_title;
+        this.book_id = book_id;
+        this.duration = duration;
+        this.price = price;
+        this.category_title=category_title;
+        this.star = star;
+    }
+
 
 
 

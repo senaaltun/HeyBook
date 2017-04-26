@@ -2,21 +2,10 @@ package heybook.team1.com.heybookv2.Activity;
 
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,20 +22,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import heybook.team1.com.heybookv2.API.ApiClient;
-import heybook.team1.com.heybookv2.API.ApiClientInterface;
 import heybook.team1.com.heybookv2.Adapter.CategoryAdapter;
-import heybook.team1.com.heybookv2.Adapter.SepetAdapter;
-import heybook.team1.com.heybookv2.Model.Book;
 import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Category extends BaseActivity {
   private RecyclerView maceraRecyclerView;
@@ -142,11 +123,10 @@ public class Category extends BaseActivity {
         for (int i = 0; i < category.length(); i++) {
           final JSONObject catData = category.getJSONObject(i);
           if (catData.getString("category_title").equals("Türk Edebiyatı Klasikleri")) {
-            Log.d("Log","1");
             classicsData.add(new Data(catData.getString("book_id"), catData.getString("book_title"),
                 catData.getString("photo"), catData.getString("author_title"),
                 catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, classicsData);
             RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -154,11 +134,10 @@ public class Category extends BaseActivity {
             classicsRecyclerView.setItemAnimator(new DefaultItemAnimator());
             classicsRecyclerView.setAdapter(categoryAdapter);
           } else if (catData.getString("category_title").equals("Bilim Kurgu")) {
-            Log.d("Log","2");
             scienceData.add(new Data(catData.getString("book_id"), catData.getString("book_title"),
                 catData.getString("photo"), catData.getString("author_title"),
                 catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, scienceData);
             RecyclerView.LayoutManager scienceLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -166,11 +145,10 @@ public class Category extends BaseActivity {
             scienceRecyclerView.setItemAnimator(new DefaultItemAnimator());
             scienceRecyclerView.setAdapter(categoryAdapter);
           } else if (catData.getString("category_title").equals("Tarih")) {
-            Log.d("Log","3");
             historyData.add(new Data(catData.getString("book_id"), catData.getString("book_title"),
                 catData.getString("photo"), catData.getString("author_title"),
                 catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, historyData);
             RecyclerView.LayoutManager historyLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -178,11 +156,10 @@ public class Category extends BaseActivity {
             historyRecyclerView.setItemAnimator(new DefaultItemAnimator());
             historyRecyclerView.setAdapter(categoryAdapter);
           } else if (catData.getString("category_title").equals("Macera")) {
-            Log.d("Log","4");
             adventureData.add(new Data(catData.getString("book_id"), catData.getString("book_title"),
                 catData.getString("photo"), catData.getString("author_title"),
                 catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, adventureData);
             RecyclerView.LayoutManager adventureLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -190,7 +167,6 @@ public class Category extends BaseActivity {
             maceraRecyclerView.setItemAnimator(new DefaultItemAnimator());
             maceraRecyclerView.setAdapter(categoryAdapter);
           } else if(catData.getString("category_title").equals("Korku")){
-            Log.d("Log","5");
             fearData.add(new Data(catData.getString("book_id"), catData.getString("book_title"), catData.getString("photo"),
                 catData.getString("author_title"), catData.getString("duration"), catData.getString("price"),
                 catData.getString("category_title")));
@@ -201,10 +177,9 @@ public class Category extends BaseActivity {
             fearRecyclerView.setItemAnimator(new DefaultItemAnimator());
             fearRecyclerView.setAdapter(categoryAdapter);
           } else if(catData.getString("category_title").equals("Kişisel Gelişim")){
-            Log.d("Log","6");
             personalDevelopmentData.add(new Data(catData.getString("book_id"), catData.getString("book_title"), catData.getString("photo"),
                 catData.getString("author_title"), catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, personalDevelopmentData);
             RecyclerView.LayoutManager personelLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -212,10 +187,9 @@ public class Category extends BaseActivity {
             personalDevelopmentRecyclerView.setItemAnimator(new DefaultItemAnimator());
             personalDevelopmentRecyclerView.setAdapter(categoryAdapter);
           } else if(catData.getString("category_title").equals("Roman")){
-            Log.d("Log","7");
             novelData.add(new Data(catData.getString("book_id"), catData.getString("book_title"), catData.getString("photo"),
                 catData.getString("author_title"), catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, novelData);
             RecyclerView.LayoutManager novelLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -223,10 +197,9 @@ public class Category extends BaseActivity {
             novelRecyclerView.setItemAnimator(new DefaultItemAnimator());
             novelRecyclerView.setAdapter(categoryAdapter);
           } else if(catData.getString("category_title").equals("Öykü")){
-            Log.d("Log","8");
             fableData.add(new Data(catData.getString("book_id"), catData.getString("book_title"), catData.getString("photo"),
                 catData.getString("author_title"), catData.getString("duration"), catData.getString("price"),
-                catData.getString("category_title")));
+                catData.getString("category_title"),catData.getString("star")));
             categoryAdapter = new CategoryAdapter(this, fableData);
             RecyclerView.LayoutManager fabelLayoutManager =
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -236,21 +209,6 @@ public class Category extends BaseActivity {
           }
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       }

@@ -14,15 +14,42 @@ import java.util.List;
 public class HeyBook extends Application{
   private String userId;
   private List<Favorite> userFavList = new ArrayList();
-  private List<Data> userChartList = new ArrayList<>();
+  private ArrayList<Data> userChartList = new ArrayList<>();
+  private boolean isDatasetChanged = false;
+  private ArrayList<Data> removedItems = new ArrayList<>();
+  private ArrayList<String> removedBookIds = new ArrayList<>();
+
+  public ArrayList<String> getRemovedBookIds() {
+    return removedBookIds;
+  }
+
+  public void setRemovedBookIds(ArrayList<String> removedBookIds) {
+    this.removedBookIds = removedBookIds;
+  }
+
+  public ArrayList<Data> getRemovedItems() {
+    return removedItems;
+  }
+
+  public void setRemovedItems(ArrayList<Data> removedItems) {
+    this.removedItems = removedItems;
+  }
+
+  public boolean isDatasetChanged() {
+    return isDatasetChanged;
+  }
+
+  public void setDatasetChanged(boolean datasetChanged) {
+    isDatasetChanged = datasetChanged;
+  }
 
   private boolean isUserLogin;
 
-  public List<Data> getUserChartList() {
+  public ArrayList<Data> getUserChartList() {
     return userChartList;
   }
 
-  public void setUserChartList(List<Data> userChartList) {
+  public void setUserChartList(ArrayList<Data> userChartList) {
     this.userChartList = userChartList;
   }
 

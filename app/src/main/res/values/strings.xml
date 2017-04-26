@@ -43,4 +43,7 @@
     <string name="kisisel_gelisim">KİŞİSEL GELİŞİM</string>
     <string name="favoriler">Favoriler</string>
     <string name="title_activity_sepet">Sepet</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="arama">HeyBook\'ta Ara</string>
+    <string name="search_button">Arama Yap</string>
 </resources>

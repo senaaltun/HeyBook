@@ -11,6 +11,10 @@
             android:icon="@drawable/kategori"
             android:title="Kategoriler"/>
         <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_white_24dp"
+            android:title="Heybook'ta Ara"/>
+        <item
             android:id="@+id/nav_kitaplarım"
             android:icon="@drawable/kitaplarim"
             android:title="Kitaplarım" />

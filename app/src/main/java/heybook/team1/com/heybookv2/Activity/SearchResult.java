@@ -20,6 +20,8 @@ public class SearchResult extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
+        getSupportActionBar().setTitle("Arama Sonuçları");
+
         resultDataRecyclerView = (RecyclerView)findViewById(R.id.searchResultRecyclerView);
 
         ArrayList<Data> resultDataList = (ArrayList<Data>)getIntent().getSerializableExtra("resultDataList");
@@ -30,9 +32,5 @@ public class SearchResult extends BaseActivity {
         adapter = new ResultBookAdapter(SearchResult.this, resultDataList);
 
         resultDataRecyclerView.setAdapter(adapter);
-
-
-
-
     }
 }

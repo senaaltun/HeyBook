@@ -87,6 +87,7 @@ public class ResultBookAdapter extends RecyclerView.Adapter<ResultBookAdapter.Vi
             Intent intent = new Intent(context,SingleBook.class);
             int pos = this.getAdapterPosition();
             intent.putExtra("Position",pos);
+            intent.putExtra("bookId",data.get(pos).getBook_id());
             context.startActivity(intent);
             Log.d("Position",String.valueOf(pos));
         }

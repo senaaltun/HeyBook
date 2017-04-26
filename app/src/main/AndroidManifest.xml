@@ -69,7 +69,11 @@
             android:name=".Activity.Sepet"
             android:label="@string/title_activity_sepet"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.Odeme"></activity>
+        <activity android:name=".Activity.Odeme" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

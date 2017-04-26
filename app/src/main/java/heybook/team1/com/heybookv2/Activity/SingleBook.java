@@ -130,7 +130,9 @@ public class SingleBook extends BaseActivity {
                 if (!sessionManager.isLoggedIn()) {
                     Toast.makeText(SingleBook.this, "Önce giriş yapmanız gerekmektedir.", Toast.LENGTH_SHORT)
                             .show();
-                    startActivity(new Intent(SingleBook.this, LoginActivity.class));
+                    Intent intent = new Intent(SingleBook.this,LoginActivity.class);
+                    intent.putExtra("clickedBook",bookID);
+                    startActivity(intent);
                 } else {
                     HashMap<String, String> user = sessionManager.getUserDetails();
                     userId = user.get("userId");
@@ -157,63 +159,69 @@ public class SingleBook extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                try {
-                    URL url = new URL("https://heybook.online/api.php");
-                    HttpsURLConnection connection = null;
-                    connection = (HttpsURLConnection) url.openConnection();
-                    connection.setReadTimeout(10000);
-                    connection.setConnectTimeout(15000);
-                    connection.setRequestMethod("POST");
-                    connection.setDoInput(true);
-                    connection.setDoOutput(true);
-                    bookID = getIntent().getStringExtra("bookId");
-                    Log.d("bookId", bookID);
-                    HashMap<String, String> params = new HashMap<>();
-                    params.put("request", "request");
-                    params.put("requestValue", "user_cart-add");
-                    params.put("user_id", userId);
-                    params.put("bookId", bookID);
+                if(sessionManager.isLoggedIn()){
+                    try {
+                        URL url = new URL("https://heybook.online/api.php");
+                        HttpsURLConnection connection = null;
+                        connection = (HttpsURLConnection) url.openConnection();
+                        connection.setReadTimeout(10000);
+                        connection.setConnectTimeout(15000);
+                        connection.setRequestMethod("POST");
+                        connection.setDoInput(true);
+                        connection.setDoOutput(true);
+                        bookID = getIntent().getStringExtra("bookId");
+                        Log.d("bookId", bookID);
+                        HashMap<String, String> params = new HashMap<>();
+                        params.put("request", "request");
+                        params.put("requestValue", "user_cart-add");
+                        params.put("user_id", userId);
+                        params.put("bookId", bookID);
 
-                    OutputStream os = connection.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getChart(params));
-                    writer.flush();
-                    writer.close();
-                    os.close();
-                    connection.connect();
-                    int responseCode = connection.getResponseCode();
+                        OutputStream os = connection.getOutputStream();
+                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                        writer.write(getChart(params));
+                        writer.flush();
+                        writer.close();
+                        os.close();
+                        connection.connect();
+                        int responseCode = connection.getResponseCode();
 
-                    StringBuilder result = new StringBuilder();
+                        StringBuilder result = new StringBuilder();
 
-                    if (responseCode == HttpsURLConnection.HTTP_OK) {
-                        BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-                        String singleBookJson;
-                        while ((singleBookJson = br.readLine()) != null) {
-                            result.append(singleBookJson).append("\n");
-                        }
-
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                            JSONObject jsonData = new JSONObject(result.toString());
-                            Log.d("jsonData", jsonData.toString());
-                            if(jsonData.getString("response").equals("success")){
-                                Toast.makeText(SingleBook.this,
-                                        jsonData.getString("message"),Toast.LENGTH_SHORT).show();
-                            } else{
-                                Toast.makeText(SingleBook.this,
-                                        "Kitap sepetinizde zaten mevcut.",Toast.LENGTH_SHORT).show();
+                        if (responseCode == HttpsURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+                            String singleBookJson;
+                            while ((singleBookJson = br.readLine()) != null) {
+                                result.append(singleBookJson).append("\n");
                             }
 
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                                JSONObject jsonData = new JSONObject(result.toString());
+                                Log.d("jsonData", jsonData.toString());
+                                if(jsonData.getString("response").equals("success")){
+                                    Toast.makeText(SingleBook.this,
+                                            jsonData.getString("message"),Toast.LENGTH_SHORT).show();
+                                } else{
+                                    Toast.makeText(SingleBook.this,
+                                            "Kitap sepetinizde zaten mevcut.",Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+
                         }
 
-
+                    } catch (ProtocolException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }else{
+                    Toast.makeText(SingleBook.this,
+                            "Önce giriş yapmanız gerekmektedir.",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SingleBook.this,LoginActivity.class));
                 }
             }
         });

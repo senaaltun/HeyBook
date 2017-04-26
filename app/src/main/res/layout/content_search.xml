@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="heybook.team1.com.heybookv2.Activity.SearchActivity"
+    tools:showIn="@layout/app_bar_search">
+
+    <RelativeLayout
+        android:id="@+id/searchCover"
+        android:background="@drawable/fav_bg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="#FFF"
+        android:text="@string/arama"
+        android:layout_marginBottom="38dp"
+        android:layout_above="@+id/searchTitle"
+        android:layout_alignLeft="@+id/searchTitle"
+        android:layout_alignStart="@+id/searchTitle" />
+
+
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ne aramak istiyorsunuz?"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_below="@+id/searchCover"
+        android:layout_margin="20dp"
+        />
+
+    <EditText
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/back"
+        android:layout_alignTop="@+id/searchTitle"
+        android:layout_alignLeft="@+id/searchTitle"
+        android:layout_alignStart="@+id/searchTitle"
+        android:layout_marginTop="22dp"
+        />
+    <requestFocus/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/searchInput"
+        android:layout_alignStart="@+id/searchInput"
+        android:layout_below="@+id/searchInput"
+        android:layout_marginTop="25dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/searchBookTitle"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Kitap adına göre"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yazara göre"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/searchAuthor"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Seslendirene göre"
+            android:id="@+id/searchNarrator"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:background="#50d2c2"
+        android:text="@string/search_button"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FFF"
+        android:fontFamily="sans-serif-smallcaps"
+        />
+
+
+</RelativeLayout>

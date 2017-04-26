@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
       if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
         JSONObject jsonData = new JSONObject(result.toString());
         Log.d("jsonData",jsonData.toString());
-        final JSONObject userDataMessage = jsonData.getJSONObject("message");
+        final String userDataMessage = jsonData.getString("message");
         final JSONObject userData = jsonData.getJSONObject("data");
         final String userId = userData.getString("user_id");
 

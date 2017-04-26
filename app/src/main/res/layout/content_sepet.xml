@@ -79,15 +79,6 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:id="@+id/recycle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/recycle"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
             android:id="@+id/pay"
             android:layout_width="200dp"
             android:layout_height="35dp"
@@ -96,8 +87,7 @@
             android:text="ÖDEME YAP"
             android:textColor="#FFF"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/recycle"
-            android:layout_toEndOf="@+id/recycle" />
+            />
 
 
     </RelativeLayout>

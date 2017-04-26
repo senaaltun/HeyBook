@@ -1,10 +1,7 @@
 package heybook.team1.com.heybookv2.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,9 +16,6 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 import com.novoda.downloadmanager.DownloadManagerBuilder;
 import com.novoda.downloadmanager.lib.DownloadManager;
-import com.novoda.downloadmanager.lib.Request;
-import com.novoda.downloadmanager.notifications.NotificationVisibility;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +37,6 @@ import java.util.HashMap;
 import javax.net.ssl.HttpsURLConnection;
 import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.Adapter.VitrinBookAdapter;
-import heybook.team1.com.heybookv2.SessionManager;
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
 public class MainActivity extends BaseActivity {
