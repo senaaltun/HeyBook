@@ -79,7 +79,7 @@ public class VitrinBookAdapter extends RecyclerView.Adapter<VitrinBookAdapter.Vi
       Intent intent = new Intent(context, SingleBook.class);
       int pos = this.getAdapterPosition();
       intent.putExtra("Position", pos);
-      intent.putExtra("bookId", bookId);
+      intent.putExtra("bookId",data.get(pos).getBook_id());
       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       context.startActivity(intent);
     }

@@ -64,7 +64,7 @@ public class Settings extends BaseActivity {
     sharedPreferences = getSharedPreferences("HeybookPrefs",0);
 
     if(sessionManager.isLoggedIn()){
-      userProfileImage.setImageURI(Uri.parse(sharedPreferences.getString("imagePath",null)));
+      //userProfileImage.setImageURI(Uri.parse(sharedPreferences.getString("imagePath",null)));
     }
 
     addPhoto.setOnClickListener(new View.OnClickListener() {

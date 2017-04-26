@@ -30,6 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:id="@+id/titleLastListened"
         android:text="@string/last_listened"
         android:textStyle="bold"

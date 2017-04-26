@@ -21,7 +21,9 @@ import heybook.team1.com.heybookv2.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemViewHolder> {
     private ArrayList<Data> categoryData;
+
     private Context context;
+
     private LayoutInflater inflater;
 
 

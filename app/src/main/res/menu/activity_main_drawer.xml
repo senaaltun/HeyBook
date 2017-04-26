@@ -7,6 +7,10 @@
             android:icon="@drawable/vitrin"
             android:title="Vitrin" />
         <item
+            android:id="@+id/nav_cat"
+            android:icon="@drawable/kategori"
+            android:title="Kategoriler"/>
+        <item
             android:id="@+id/nav_kitaplarım"
             android:icon="@drawable/kitaplarim"
             android:title="Kitaplarım" />
@@ -39,16 +43,6 @@
             android:id="@+id/nav_cikis"
             android:icon="@drawable/cikis_yap"
             android:title="Çıkış Yap"/>
-
-        <item
-            android:id="@+id/nav_cat"
-            android:icon="@drawable/kategori"
-            android:title="Kategoriler"/>
-
-        <item
-            android:id="@+id/nav_fav"
-            android:icon="@drawable/favorilerim"
-            android:title="Favorilerim"/>
     </group>
 
 

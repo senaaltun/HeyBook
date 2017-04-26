@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import heybook.team1.com.heybookv2.HeyBook;
 import heybook.team1.com.heybookv2.Model.Favorite;
 import heybook.team1.com.heybookv2.R;
 import heybook.team1.com.heybookv2.SessionManager;
@@ -62,10 +64,7 @@ public class BaseActivity extends AppCompatActivity
 
         sharedPreferences = getSharedPreferences("HeybookPrefs",0);
 
-        sessionManager = new SessionManager(getApplicationContext());
-
-        isLoggedProfile = sessionManager.isLoggedProfile();
-
+        sessionManager = new SessionManager(BaseActivity.this);
     }
 
     @Override
@@ -84,6 +83,7 @@ public class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
     }
 
@@ -198,7 +198,7 @@ public class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_favorilerim) {
             startActivity(new Intent(BaseActivity.this, Favorites.class));
         } else if (id == R.id.nav_sepet) {
-
+            startActivity(new Intent(BaseActivity.this,Sepet.class));
         } else if (id == R.id.nav_gecmis) {
 
         } else if (id == R.id.nav_ayarlar) {
@@ -231,6 +231,8 @@ public class BaseActivity extends AppCompatActivity
                 startActivity(new Intent(BaseActivity.this,Register.class));
             } else if(matches.contains("kategoriler")){
                 startActivity(new Intent(BaseActivity.this,Category.class));
+            } else if(matches.contains("sepet")){
+                startActivity(new Intent(BaseActivity.this,Sepet.class));
             }
 
         }

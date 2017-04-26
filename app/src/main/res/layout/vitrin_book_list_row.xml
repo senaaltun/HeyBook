@@ -20,6 +20,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="#1D1D26"
+        android:fontFamily="casual"
         android:layout_marginLeft="6dp"
         android:layout_marginBottom="8dp"
         android:layout_alignParentTop="true"/>
@@ -39,6 +40,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/bookAuthor"
         android:textSize="10sp"
+        android:fontFamily="casual"
         android:layout_below="@+id/bookName"
         android:layout_toEndOf="@+id/iconYazar"
         android:layout_toRightOf="@+id/iconYazar"
@@ -60,6 +62,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/bookDuration"
         android:textColor="#ABABAE"
+        android:fontFamily="casual"
         android:layout_below="@id/bookName"
         android:layout_toRightOf="@+id/iconSure"
         android:textSize="10sp"

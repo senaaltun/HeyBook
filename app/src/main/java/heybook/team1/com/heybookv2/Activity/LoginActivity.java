@@ -127,11 +127,13 @@ public class LoginActivity extends AppCompatActivity {
       }
       if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
         JSONObject jsonData = new JSONObject(result.toString());
-        final String userDataMessage = jsonData.getString("message");
+        Log.d("jsonData",jsonData.toString());
+        final JSONObject userDataMessage = jsonData.getJSONObject("message");
         final JSONObject userData = jsonData.getJSONObject("data");
         final String userId = userData.getString("user_id");
 
         if (userDataMessage.equals("Login successed.")) {
+          ((HeyBook)getApplicationContext()).setUserLogin(true);
           sessionManager.createLoginSession(username, pw, userId);
           startActivity(new Intent(LoginActivity.this, Vitrin.class));
         } else {

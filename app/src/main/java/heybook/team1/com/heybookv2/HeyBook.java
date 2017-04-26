@@ -1,6 +1,8 @@
 package heybook.team1.com.heybookv2;
 
 import android.app.Application;
+
+import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.Model.Favorite;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,17 @@ import java.util.List;
 public class HeyBook extends Application{
   private String userId;
   private List<Favorite> userFavList = new ArrayList();
+  private List<Data> userChartList = new ArrayList<>();
+
+  private boolean isUserLogin;
+
+  public List<Data> getUserChartList() {
+    return userChartList;
+  }
+
+  public void setUserChartList(List<Data> userChartList) {
+    this.userChartList = userChartList;
+  }
 
   public String getUserId() {
     return userId;
@@ -27,5 +40,13 @@ public class HeyBook extends Application{
 
   public void setUserFavList(List<Favorite> userFavList) {
     this.userFavList = userFavList;
+  }
+
+  public boolean isUserLogin() {
+    return isUserLogin;
+  }
+
+  public void setUserLogin(boolean userLogin) {
+    isUserLogin = userLogin;
   }
 }

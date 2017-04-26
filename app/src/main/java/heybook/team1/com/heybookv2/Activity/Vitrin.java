@@ -2,14 +2,13 @@ package heybook.team1.com.heybookv2.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
-import android.provider.*;
-import android.provider.Settings;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,23 +17,17 @@ import android.widget.AdapterView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.novoda.downloadmanager.DownloadManagerBuilder;
+import com.novoda.downloadmanager.lib.DownloadManager;
+import com.novoda.downloadmanager.lib.Request;
+import com.novoda.downloadmanager.notifications.NotificationVisibility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import heybook.team1.com.heybookv2.Adapter.CoverFlowAdapter;
 import heybook.team1.com.heybookv2.Model.VitrinBookEntity;
 import heybook.team1.com.heybookv2.R;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -47,31 +40,27 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.net.ssl.HttpsURLConnection;
-
-import heybook.team1.com.heybookv2.API.ApiClient;
-import heybook.team1.com.heybookv2.API.ApiClientInterface;
-import heybook.team1.com.heybookv2.Model.Book;
 import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.Adapter.VitrinBookAdapter;
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Vitrin extends BaseActivity {
     private RecyclerView lastListenedList;
+
     private VitrinBookAdapter adapter;
+
     private ArrayList<Data> dataList = new ArrayList<>();
     private ArrayList<VitrinBookEntity> vitrinData = new ArrayList<>();
+
     private TextSwitcher title;
+
     private CoverFlowAdapter coverFlowAdapter;
     private FeatureCoverFlow coverFlow;
 
-    private RequestQueue queue;
+
+    private DownloadManager downloadManager;
+    private long downloadReference;
 
 
 
@@ -91,6 +80,8 @@ public class Vitrin extends BaseActivity {
         lastListenedList.setLayoutManager(layoutManager);
         lastListenedList.setItemAnimator(new DefaultItemAnimator());
         lastListenedList.setAdapter(adapter);
+        downloadManager = DownloadManagerBuilder.from(Vitrin.this)
+                .build();
 
 
     }
@@ -144,9 +135,9 @@ public class Vitrin extends BaseActivity {
                     final JSONArray bookD = jsonData.getJSONArray("data");
                     for(int i=0; i<bookD.length();i++){
                         JSONObject b = (JSONObject) bookD.get(i);
-                        Data bookData = new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price"));
+                        Data bookData = new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price"),b.getString("category_title"));
                         vitrinData.add(new VitrinBookEntity(bookData.getBook_id(),bookData.getPhoto(),bookData.getBook_title(),bookData.getAuthor_title()));
-                        dataList.add(new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price")));
+                        dataList.add(new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price"),b.getString("category_title")));
                     }
 
                     setContentView(R.layout.activity_vitrin);
@@ -221,6 +212,8 @@ public class Vitrin extends BaseActivity {
 
         return result.toString();
     }
+
+
 
 
 

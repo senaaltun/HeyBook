@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sepetBookTitle"
+        android:fontFamily="casual"
+        android:textColor="#FFF"
+        />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/sepetPriceIcon"
+        android:layout_below="@+id/sepetBookTitle"
+        android:src="@drawable/yazar"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:id="@+id/sepetBookPrice"
+        android:textColor="#FFF"
+        android:layout_below="@+id/sepetBookTitle"
+        android:layout_toRightOf="@+id/sepetPriceIcon"
+        android:layout_toEndOf="@+id/sepetPriceIcon" />
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/sepetBookImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/deleteBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete_black_24dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/sepetBookImage"
+        android:layout_toStartOf="@+id/sepetBookImage"
+        android:layout_marginRight="17dp"
+        android:layout_marginEnd="17dp" />
+
+</RelativeLayout>
