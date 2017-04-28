@@ -80,7 +80,7 @@
 
         <Button
             android:id="@+id/pay"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="35dp"
             android:background="#50d2c2"
             android:fontFamily="casual"

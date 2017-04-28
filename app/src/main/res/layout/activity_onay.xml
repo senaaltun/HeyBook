@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootView"
+    tools:context="heybook.team1.com.heybookv2.Activity.Onay"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:id="@+id/sepet_bg"
+      android:background="@drawable/sepet_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/onaySepet"
+        android:text="@string/sepet"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:fontFamily="casual"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/onayIconSepet"
+        android:src="@drawable/ic_sepet"
+        android:layout_alignTop="@+id/onaySepet"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="113dp"
+        android:layout_marginEnd="113dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/onayTotalPrice"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:fontFamily="casual"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_alignTop="@+id/onayIconSepet"
+        android:layout_alignLeft="@+id/onayIconSepet"
+        android:layout_alignStart="@+id/onayIconSepet" />
+  </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/content"
+      android:layout_below="@+id/sepet_bg"
+      >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondaryContent"
+        >
+      <TextView
+          android:id="@+id/message"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/security_onay_message"
+          android:textSize="10sp"
+          android:textStyle="bold"
+          android:textColor="#000"
+          android:layout_marginTop="12dp"
+          android:layout_alignParentTop="true"
+          android:layout_centerHorizontal="true"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sec"
+          android:id="@+id/secTitle"
+          android:layout_below="@+id/message"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="103dp"
+          />
+      <EditText
+          android:id="@+id/secEditText"
+          android:layout_width="60dp"
+          android:layout_height="40dp"
+          android:layout_marginTop="5dp"
+          android:layout_centerInParent="true"
+          android:background="@drawable/back"
+          android:layout_below="@id/secTitle"
+          />
+      <requestFocus/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/timer"
+          android:layout_toRightOf="@+id/secEditText"
+          android:layout_toEndOf="@+id/secEditText"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          />
+
+      <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/completePayment"
+          android:layout_alignParentBottom="true"
+          android:background="#50d2c2"
+          android:textColor="#FFF"
+          android:text="@string/aprove"
+          />
+
+    </RelativeLayout>
+
+
+  </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/onayView"
+      android:layout_below="@+id/sepet_bg"
+      android:layout_centerHorizontal="true"
+      android:visibility="gone"
+      >
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/onay"
+        android:id="@+id/ivOnay"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ödemeniz Onaylandı"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_below="@+id/ivOnay"
+        />
+  </RelativeLayout>
+
+
+
+</RelativeLayout>

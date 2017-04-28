@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="heybook.team1.com.heybookv2.Activity.Odeme"
+    tools:showIn="@layout/app_bar_odeme">
+
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:id="@+id/sepet_bg"
+      android:background="@drawable/sepet_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/odemeSepet"
+        android:text="@string/sepet"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:fontFamily="casual"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/odemeIconSepet"
+        android:src="@drawable/ic_sepet"
+        android:layout_alignTop="@+id/odemeSepet"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="113dp"
+        android:layout_marginEnd="113dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/odemeTotalPrice"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:fontFamily="casual"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_alignTop="@+id/odemeIconSepet"
+        android:layout_alignLeft="@+id/odemeIconSepet"
+        android:layout_alignStart="@+id/odemeIconSepet" />
+  </RelativeLayout>
+
+  <LinearLayout
+
+      android:layout_margin="10dp"
+      android:layout_below="@+id/sepet_bg"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:id="@+id/linearLayout"
+      >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userInfo"
+        android:text="@string/odeme_user_info"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#000"
+        />
+    <EditText
+        android:id="@+id/odemeUserInfoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/back"
+        />
+    <requestFocus/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumber"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#000"
+        android:text="@string/card_number"
+        android:layout_marginTop="5dp"
+        />
+    <EditText
+        android:id="@+id/cardNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/back"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:text="@string/son_kullanma"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+      <Spinner
+          android:id="@+id/spinnerMonth"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:spinnerMode="dropdown"
+          />
+      <Spinner
+          android:id="@+id/spinnerYear"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:spinnerMode="dropdown"
+          />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cvcNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:text="@string/cvc_number"
+        />
+    <EditText
+        android:id="@+id/cvcNumberEditText"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/back"
+        />
+  </LinearLayout>
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/aprovePayment"
+      android:layout_alignParentBottom="true"
+      android:background="#50d2c2"
+      android:textColor="#FFF"
+      android:text="@string/odemeyi_onayla"
+      />
+
+
+</RelativeLayout>

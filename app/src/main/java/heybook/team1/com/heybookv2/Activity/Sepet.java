@@ -84,24 +84,9 @@ public class Sepet extends BaseActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder paymentDialogBuilder = new AlertDialog.Builder(Sepet.this);
-                paymentDialogBuilder.setTitle("Lütfen Ödeme Bilgilerinizi Giriniz");
-                paymentDialogBuilder.setView(R.layout.payment_view);
-                paymentDialogBuilder.setPositiveButton("Tamamla", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Sepet.this, Listen.class));
-                    }
-                })
-                        .setNegativeButton("Vazgeç", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-
-                AlertDialog alertDialog = paymentDialogBuilder.create();
-                alertDialog.show();
+                Intent intent = new Intent(Sepet.this,Odeme.class);
+                intent.putExtra("totalPrice",totalPrice);
+                startActivity(intent);
             }
         });
 
