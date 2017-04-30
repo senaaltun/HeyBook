@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import heybook.team1.com.heybookv2.Activity.Listen;
 import heybook.team1.com.heybookv2.R;
 import java.util.ArrayList;
 
@@ -76,11 +77,17 @@ public class UserBooksAdapter extends RecyclerView.Adapter<UserBooksAdapter.View
         }
 
         @Override public void onClick(View view) {
-            Intent intent = new Intent(context, SingleBook.class);
+            Intent intent = new Intent(context, Listen.class);
             int pos = this.getAdapterPosition();
             intent.putExtra("Position", pos);
             intent.putExtra("bookId",data.get(pos).getBook_id());
-            intent.putExtra("isUserComingFromBooks",true);
+            intent.putExtra("bookTitle",data.get(pos).getBook_title());
+            intent.putExtra("bookAuthor",data.get(pos).getAuthor_title());
+            intent.putExtra("bookNarrator",data.get(pos).getNarrator_title());
+            intent.putExtra("bookPhoto",data.get(pos).getPhoto());
+            intent.putExtra("publisherTitle",data.get(pos).getPublisher_title());
+            intent.putExtra("bookAudio",data.get(pos).getAudio());
+            intent.putExtra("duration",data.get(pos).getDuration());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

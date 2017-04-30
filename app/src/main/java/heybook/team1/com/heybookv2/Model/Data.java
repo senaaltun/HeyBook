@@ -62,6 +62,18 @@ public class Data implements Serializable {
         this.star = star;
     }
 
+    public Data(String book_id,String book_title,String author_title,String audio,String narrator_title,String publisher_title,String duration,String publisher_id,String photo){
+        this.book_id = book_id;
+        this.book_title = book_title;
+        this.author_title = author_title;
+        this.audio = audio;
+        this.narrator_title=narrator_title;
+        this.publisher_title=publisher_title;
+        this.duration=duration;
+        this.publisher_id=publisher_id;
+        this.photo=photo;
+    }
+
 
 
 

@@ -163,7 +163,7 @@ public class SingleBook extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if(sessionManager.isLoggedIn() && !intent.getBooleanExtra("isUserComingFromBooks",false)){
+                if(sessionManager.isLoggedIn()){
                     try {
                         URL url = new URL("https://heybook.online/api.php");
                         HttpsURLConnection connection = null;
@@ -220,9 +220,7 @@ public class SingleBook extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                } else if(sessionManager.isLoggedIn() && intent.getBooleanExtra("isUserComingFromBooks",false)){
-                    startActivity(new Intent(SingleBook.this,Listen.class));
-                }  else{
+                } else{
                     Toast.makeText(SingleBook.this,
                             "Önce giriş yapmanız gerekmektedir.",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SingleBook.this,LoginActivity.class));

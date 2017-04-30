@@ -117,7 +117,8 @@ public class UserBooks extends BaseActivity {
                 final JSONArray bookD = jsonData.getJSONArray("data");
                 for (int i = 0; i < bookD.length(); i++) {
                     JSONObject b = (JSONObject) bookD.get(i);
-                    userBooksData.add(new Data(b.getString("book_id"),b.getString("book_title"),b.getString("photo"),b.getString("author_title"),b.getString("duration"),b.getString("price"),b.getString("category_title")));
+                    userBooksData.add(new Data(b.getString("book_id"),b.getString("book_title"),b.getString("author_title"),b.getString("audio"),
+                            b.getString("narrator_title"),b.getString("publisher_title"),b.getString("duration"),b.getString("publisher_id"),b.getString("photo")));
                 }
                 adapter = new UserBooksAdapter(getApplicationContext(),userBooksData);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
