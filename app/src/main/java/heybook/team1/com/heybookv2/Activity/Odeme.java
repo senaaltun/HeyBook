@@ -34,24 +34,27 @@ public class Odeme extends BaseActivity implements View.OnClickListener {
   private List<String> monthArray = new ArrayList<>();
   private List<String> yearArray = new ArrayList<>();
 
+  private int sepetDolu;
+
+  private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
+  private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
+  private static final int DIVIDER_MODULO = 5;
+  // means divider position is every 5th symbol beginning with 1
+  private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1;
+  // means divider position is every 4th symbol beginning with 0
+  private static final char DIVIDER = '-';
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_odeme);
 
     Intent intent = getIntent();
+    sepetDolu = intent.getIntExtra("sepetDolu",0);
     double totalPrice = intent.getDoubleExtra("totalPrice", 0);
     odemeTotalPrice.setText(String.format("%.2f", totalPrice) + " TL");
     paymentButton.setOnClickListener(this);
 
     cardNumber.addTextChangedListener(new TextWatcher() {
-
-      private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
-      private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
-      private static final int DIVIDER_MODULO = 5;
-      // means divider position is every 5th symbol beginning with 1
-      private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1;
-      // means divider position is every 4th symbol beginning with 0
-      private static final char DIVIDER = '-';
 
       @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         // noop
@@ -205,6 +208,7 @@ public class Odeme extends BaseActivity implements View.OnClickListener {
         @Override public void onDismiss(DialogInterface dialog) {
           Intent intent = new Intent(Odeme.this, Onay.class);
           intent.putExtra("totalPrice", getIntent().getDoubleExtra("totalPrice", 0));
+          intent.putExtra("sepetDolu",sepetDolu);
           startActivity(intent);
         }
       });

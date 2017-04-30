@@ -21,10 +21,10 @@ import org.w3c.dom.Text;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
   private Context context;
-  private List<Favorite> favoritesBookList;
+  private ArrayList<Data> favoritesBookList;
   private LayoutInflater inflater;
 
-  public FavoritesAdapter(Context context, List<Favorite> favoritesBookList) {
+  public FavoritesAdapter(Context context, ArrayList<Data> favoritesBookList) {
     this.context = context;
     this.favoritesBookList = favoritesBookList;
     inflater = LayoutInflater.from(context);
@@ -35,22 +35,22 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     ViewHolder holder = new ViewHolder(view);
 
-    holder.favBookAuthor.setText(favoritesBookList.get(viewType).getBookAuthor());
-    holder.favBookTitle.setText(favoritesBookList.get(viewType).getBookName());
-    holder.favBookDuration.setText(favoritesBookList.get(viewType).getBookDuration());
-    Glide.with(context).load(favoritesBookList.get(viewType).getBookImage()).into(holder.favBookImage);
+    holder.favBookAuthor.setText(favoritesBookList.get(viewType).getAuthor_title());
+    holder.favBookTitle.setText(favoritesBookList.get(viewType).getBook_title());
+    holder.favBookDuration.setText(favoritesBookList.get(viewType).getDuration());
+    Glide.with(context).load(favoritesBookList.get(viewType).getPhoto()).into(holder.favBookImage);
 
     return holder;
   }
 
   @Override public void onBindViewHolder(FavoritesAdapter.ViewHolder holder, int position) {
 
-    Favorite favBookData = favoritesBookList.get(position);
+    Data favBookData = favoritesBookList.get(position);
 
-    holder.favBookTitle.setText(favBookData.getBookName());
-    holder.favBookAuthor.setText(favBookData.getBookAuthor());
-    holder.favBookDuration.setText(favBookData.getBookDuration());
-    Glide.with(context).load(favBookData.getBookImage()).into(holder.favBookImage);
+    holder.favBookTitle.setText(favBookData.getBook_title());
+    holder.favBookAuthor.setText(favBookData.getAuthor_title());
+    holder.favBookDuration.setText(favBookData.getDuration());
+    Glide.with(context).load(favBookData.getPhoto()).into(holder.favBookImage);
   }
 
   @Override public int getItemCount() {

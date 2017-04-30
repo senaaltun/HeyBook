@@ -24,6 +24,7 @@ public class SessionManager {
   private static final String PREF_NAME = "HeybookPrefs";
   public static final String KEY_NAME = "name";
   public static final String KEY_PASSWORD = "password";
+  public static final String KEY_MAIL = "mail";
   public static final String KEY_IMAGE_PATH = "imagePath";
   public static final String KEY_ID = "userId";
 
@@ -36,9 +37,11 @@ public class SessionManager {
     editor = sharedPreferences.edit();
   }
 
-  public void createLoginSession(String name,String password){
+  public void userSettings(String name,String password,String mail,String userId){
     editor.putBoolean(IS_LOGIN,true);
     editor.putString(KEY_NAME,name);
+    editor.putString(KEY_MAIL,mail);
+    editor.putString(KEY_ID,userId);
     editor.putString(KEY_PASSWORD,password);
 
     editor.commit();

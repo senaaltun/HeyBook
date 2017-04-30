@@ -1,108 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     tools:context="heybook.team1.com.heybookv2.Activity.Settings"
-    tools:showIn="@layout/app_bar_settings"
-    >
+    tools:showIn="@layout/app_bar_settings">
 
-  <de.hdodenhof.circleimageview.CircleImageView
-      android:id="@+id/userProfileImage"
-      android:layout_width="90dp"
-      android:layout_height="90dp"
-      android:src="@drawable/user_default"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="63dp"
-      />
-  <EditText
-      android:id="@+id/user_title_settings"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="İsim Soyisim"
-      android:layout_below="@+id/userProfileImage"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentStart="true"
-      android:layout_marginTop="33dp" />
-      <requestFocus/>
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/user_email_settings"
-      android:layout_below="@+id/user_title_settings"
-      android:hint="Email"
-      />
-  <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:inputType="textPassword"
-    android:id="@+id/password_settings"
-    android:layout_below="@+id/user_email_settings"
-    android:hint="Parola"
-    />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:inputType="textPassword"
-      android:id="@+id/password_again"
-      android:layout_below="@+id/password_settings"
-      android:hint="Parola"
-      />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userProfileImage"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:src="@drawable/hb_logo" />
 
-  <TextView
-      android:id="@+id/abone"
-      android:text="@string/abone"
-      android:layout_marginTop="20dp"
-      android:layout_below="@+id/password_again"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/user_title_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/userProfileImage"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/back"
+        android:hint="İSİM SOYİSİM" />
 
-  <ImageView
-      android:id="@+id/addPhotoButton"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:src="@drawable/foto_ekle"
-      android:layout_alignTop="@+id/userProfileImage"
-      android:layout_alignRight="@+id/userProfileImage"
-      android:layout_alignEnd="@+id/userProfileImage"
-      android:layout_marginTop="12dp" />
+    <requestFocus />
 
-  <Switch
-      android:id="@+id/switch1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBaseline="@+id/abone"
-      android:layout_alignBottom="@+id/abone"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentEnd="true"
-      android:layout_marginRight="22dp"
-      android:layout_marginEnd="22dp" />
-  <TextView
-      android:id="@+id/sightedMode"
-      android:text="@string/sighted_mode"
-      android:layout_marginTop="20dp"
-      android:layout_below="@+id/abone"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/user_email_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_title_settings"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/back"
+        android:hint="EPOSTA" />
+    <EditText
+        android:id="@+id/password_mevcut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_email_settings"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/back"
+        android:hint="MEVCUT PAROLA"
+        android:inputType="textPassword" />
 
-  <Switch
-      android:id="@+id/switch2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/sightedMode"
-      android:layout_alignEnd="@+id/switch1"
-      android:layout_alignRight="@+id/switch1" />
-  <Button
-      android:id="@+id/saveSettings"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="#50d2c2"
-      android:text="@string/updateProfile"
-      android:layout_alignParentBottom="true" />
+    <EditText
+        android:id="@+id/password_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password_mevcut"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/back"
+        android:hint="PAROLA"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/password_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password_settings"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/back"
+        android:hint="PAROLA TEKRAR"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/abone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password_again"
+        android:layout_marginTop="20dp"
+        android:text="@string/abone" />
+
+    <ImageView
+        android:id="@+id/addPhotoButton"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/userProfileImage"
+        android:layout_alignRight="@+id/userProfileImage"
+        android:layout_alignTop="@+id/userProfileImage"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/foto_ekle" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/abone"
+        android:layout_alignBottom="@+id/abone"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp" />
+
+    <TextView
+        android:id="@+id/sightedMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abone"
+        android:layout_marginTop="20dp"
+        android:text="@string/sighted_mode" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sightedMode"
+        android:layout_alignEnd="@+id/switch1"
+        android:layout_alignRight="@+id/switch1" />
+
+    <Button
+        android:id="@+id/saveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#50d2c2"
+        android:text="@string/updateProfile" />
 
 
 </RelativeLayout>

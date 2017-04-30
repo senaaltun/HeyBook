@@ -147,6 +147,15 @@
         android:textColor="#000"
         android:layout_below="@+id/ivOnay"
         />
+    <Button
+        android:id="@+id/directUserBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#50d2c2"
+        android:textColor="#FFF"
+        android:text="@string/kitaplarima_git"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
   </RelativeLayout>
 
 

@@ -1,8 +1,11 @@
 package heybook.team1.com.heybookv2.Activity;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
@@ -27,6 +30,7 @@ import heybook.team1.com.heybookv2.HeyBook;
 import heybook.team1.com.heybookv2.Model.Favorite;
 import heybook.team1.com.heybookv2.R;
 import heybook.team1.com.heybookv2.SessionManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,20 +55,23 @@ public class BaseActivity extends AppCompatActivity
     private SessionManager sessionManager;
 
     private SharedPreferences sharedPreferences;
+
     private ImageView profile;
+    private ImageView headerImage;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
-    private boolean isLoggedProfile=false;
+    private boolean isLoggedProfile = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPreferences = getSharedPreferences("HeybookPrefs",0);
+        sharedPreferences = getSharedPreferences("HeybookPrefs", 0);
 
         sessionManager = new SessionManager(BaseActivity.this);
+
     }
 
     @Override
@@ -73,8 +80,6 @@ public class BaseActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -86,6 +91,7 @@ public class BaseActivity extends AppCompatActivity
 
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -178,7 +184,7 @@ public class BaseActivity extends AppCompatActivity
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
                     "Lütfen sesli bir komut verin : ");
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"tr-TR");
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "tr-TR");
             startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
         }
         return super.onOptionsItemSelected(item);
@@ -194,27 +200,27 @@ public class BaseActivity extends AppCompatActivity
         if (id == R.id.nav_vitrin) {
             startActivity(new Intent(BaseActivity.this, Vitrin.class));
         } else if (id == R.id.nav_kitaplarım) {
-
+            startActivity(new Intent(BaseActivity.this, UserBooks.class));
         } else if (id == R.id.nav_favorilerim) {
             startActivity(new Intent(BaseActivity.this, Favorites.class));
         } else if (id == R.id.nav_sepet) {
-            startActivity(new Intent(BaseActivity.this,Sepet.class));
+            startActivity(new Intent(BaseActivity.this, Sepet.class));
         } else if (id == R.id.nav_gecmis) {
 
         } else if (id == R.id.nav_ayarlar) {
-            startActivity(new Intent(BaseActivity.this,Settings.class));
+            startActivity(new Intent(BaseActivity.this, Settings.class));
         } else if (id == R.id.nav_kayit) {
             startActivity(new Intent(BaseActivity.this, Register.class));
         } else if (id == R.id.nav_cikis) {
             startActivity(new Intent(BaseActivity.this, Logout.class));
-        } else if( id == R.id.nav_login){
-            startActivity(new Intent(BaseActivity.this,LoginActivity.class));
-        } else if( id == R.id.nav_cat){
-            startActivity(new Intent(BaseActivity.this,Category.class));
-        } else if(id == R.id.fav){
-            startActivity(new Intent(BaseActivity.this,Favorites.class));
-        } else if(id == R.id.nav_search){
-            startActivity(new Intent(BaseActivity.this,SearchActivity.class));
+        } else if (id == R.id.nav_login) {
+            startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+        } else if (id == R.id.nav_cat) {
+            startActivity(new Intent(BaseActivity.this, Category.class));
+        } else if (id == R.id.fav) {
+            startActivity(new Intent(BaseActivity.this, Favorites.class));
+        } else if (id == R.id.nav_search) {
+            startActivity(new Intent(BaseActivity.this, SearchActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -227,14 +233,14 @@ public class BaseActivity extends AppCompatActivity
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            if(matches.contains("vitrin")){
-                startActivity(new Intent(BaseActivity.this,Vitrin.class));
-            }else if(matches.contains("kayıt ol")){
-                startActivity(new Intent(BaseActivity.this,Register.class));
-            } else if(matches.contains("kategoriler")){
-                startActivity(new Intent(BaseActivity.this,Category.class));
-            } else if(matches.contains("sepet")){
-                startActivity(new Intent(BaseActivity.this,Sepet.class));
+            if (matches.contains("vitrin")) {
+                startActivity(new Intent(BaseActivity.this, Vitrin.class));
+            } else if (matches.contains("kayıt ol")) {
+                startActivity(new Intent(BaseActivity.this, Register.class));
+            } else if (matches.contains("kategoriler")) {
+                startActivity(new Intent(BaseActivity.this, Category.class));
+            } else if (matches.contains("sepet")) {
+                startActivity(new Intent(BaseActivity.this, Sepet.class));
             }
 
         }

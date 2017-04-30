@@ -98,9 +98,13 @@ public class SingleBook extends BaseActivity {
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> user = sessionManager.getUserDetails();
         userId = user.get("userId");
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         pos = intent.getIntExtra("Position", 0);
         bookID = getIntent().getStringExtra("bookId");
+
+        if(intent.getBooleanExtra("isUserComingFromBooks",false)){
+            addToChartButton.setText("Kitabı Dinle");
+        }
 
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -159,7 +163,7 @@ public class SingleBook extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if(sessionManager.isLoggedIn()){
+                if(sessionManager.isLoggedIn() && !intent.getBooleanExtra("isUserComingFromBooks",false)){
                     try {
                         URL url = new URL("https://heybook.online/api.php");
                         HttpsURLConnection connection = null;
@@ -207,8 +211,6 @@ public class SingleBook extends BaseActivity {
                                 }
 
                             }
-
-
                         }
 
                     } catch (ProtocolException e) {
@@ -218,7 +220,9 @@ public class SingleBook extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else if(sessionManager.isLoggedIn() && intent.getBooleanExtra("isUserComingFromBooks",false)){
+                    startActivity(new Intent(SingleBook.this,Listen.class));
+                }  else{
                     Toast.makeText(SingleBook.this,
                             "Önce giriş yapmanız gerekmektedir.",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SingleBook.this,LoginActivity.class));

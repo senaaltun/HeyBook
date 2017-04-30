@@ -19,6 +19,16 @@ public class HeyBook extends Application{
   private ArrayList<Data> removedItems = new ArrayList<>();
   private ArrayList<String> removedBookIds = new ArrayList<>();
 
+  public boolean isUserPhotoAdd() {
+    return isUserPhotoAdd;
+  }
+
+  public void setUserPhotoAdd(boolean userPhotoAdd) {
+    isUserPhotoAdd = userPhotoAdd;
+  }
+
+  private boolean isUserPhotoAdd = false;
+
   public ArrayList<String> getRemovedBookIds() {
     return removedBookIds;
   }

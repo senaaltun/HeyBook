@@ -1,5 +1,6 @@
 package heybook.team1.com.heybookv2.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,15 +33,21 @@ import heybook.team1.com.heybookv2.API.ApiClient;
 import heybook.team1.com.heybookv2.API.ApiClientInterface;
 import heybook.team1.com.heybookv2.Model.RegisterModel;
 import heybook.team1.com.heybookv2.R;
+import heybook.team1.com.heybookv2.SessionManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register extends BaseActivity {
-    private AutoCompleteTextView userTitle;
-    private AutoCompleteTextView userEmail;
+    private EditText userTitle;
+    private EditText userEmail;
     private EditText passwordField;
+
     private Button registerButton;
+
+    private SessionManager sessionManager;
+
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +60,10 @@ public class Register extends BaseActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        userTitle = (AutoCompleteTextView) findViewById(R.id.regUserName);
-        userEmail = (AutoCompleteTextView) findViewById(R.id.mail);
+        sessionManager = new SessionManager(Register.this);
+
+        userTitle = (EditText) findViewById(R.id.regUserName);
+        userEmail = (EditText) findViewById(R.id.mail);
         passwordField = (EditText) findViewById(R.id.passwordRegister);
         registerButton = (Button) findViewById(R.id.registerButton);
 
@@ -64,13 +74,21 @@ public class Register extends BaseActivity {
                 String mail = userEmail.getText().toString();
                 String password = passwordField.getText().toString();
 
-                try {
-                    registerUser(user_title,mail,password);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(!mail.contains("@") || !mail.endsWith("com")){
+                    Toast.makeText(Register.this,
+                            "Uygun formatta bir mail adresi girmediniz.",Toast.LENGTH_SHORT).show();
+                }else{
+
+                    try {
+                        registerUser(user_title,mail,password);
+                        sessionManager.userSettings(user_title,password,mail,userId);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
 
 
             }
@@ -121,11 +139,16 @@ public class Register extends BaseActivity {
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                 JSONObject jsonData = new JSONObject(result.toString());
+                Log.d("jsonData",jsonData.toString());
+                JSONObject jsonArray = jsonData.getJSONObject("data");
+                Log.d("jsonData",jsonData.toString());
                 if(jsonData.getString("response").equals("success")){
+                    userId = jsonArray.getString("user_id");
+                    Log.d("userID",userId);
                     Toast.makeText(Register.this,"Başarıyla kayıt oldunuz!",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Register.this,Vitrin.class));
                 }else{
-                    Toast.makeText(Register.this,"Bir hata oluştu.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this,jsonData.getString("message"),Toast.LENGTH_SHORT).show();
                 }
             }
         }

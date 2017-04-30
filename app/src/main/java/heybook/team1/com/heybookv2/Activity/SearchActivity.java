@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,10 +46,18 @@ import heybook.team1.com.heybookv2.R;
 
 public class SearchActivity extends BaseActivity {
     private EditText searchInput;
+
     private String input;
+
+
     private Button searchButton;
+
+    private ArrayList<Data> bookList;
+    private ArrayList<Data> author;
+    private ArrayList<Data> narrator;
     private ArrayList<Data> searchResults = new ArrayList<>();
-    private VitrinBookAdapter adapter;
+
+    private RadioGroup searchPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,23 +67,41 @@ public class SearchActivity extends BaseActivity {
         getSupportActionBar().setTitle("Heybook'ta Ara");
 
 
-
-
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
                     input = searchInput.getText().toString();
+                    int checkedRadioButton = searchPreference.getCheckedRadioButtonId();
+                    switch (checkedRadioButton){
+                        case R.id.searchBookTitle:
+                            searchResults.clear();
+                            break;
+                        case R.id.searchAuthor:
+                            searchResults.clear();
+                            break;
+                        case R.id.searchNarrator:
+                            searchResults.clear();
+                            break;
+                    }
                     getSearchResult();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(SearchActivity.this, SearchResult.class);
-                intent.putExtra("resultDataList", searchResults);
-                startActivity(intent);
+                if (searchResults.size() != 0) {
+                    Intent intent = new Intent(SearchActivity.this, SearchResult.class);
+                    intent.putExtra("resultDataList", searchResults);
+                    startActivity(intent);
+                } else{
+                    new AlertDialog.Builder(SearchActivity.this)
+                            .setTitle("Arama")
+                            .setMessage("Aradığınız kriterlere ait kitap bulunamadı.")
+                            .show();
+                }
+
             }
         });
 
@@ -83,8 +111,9 @@ public class SearchActivity extends BaseActivity {
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        searchInput = (EditText)findViewById(R.id.searchInput);
-        searchButton = (Button)findViewById(R.id.searchButton);
+        searchInput = (EditText) findViewById(R.id.searchInput);
+        searchButton = (Button) findViewById(R.id.searchButton);
+        searchPreference = (RadioGroup)findViewById(R.id.searchPref);
     }
 
     private void getSearchResult() throws IOException, JSONException {
@@ -95,7 +124,6 @@ public class SearchActivity extends BaseActivity {
         connection.setRequestMethod("POST");
         connection.setDoInput(true);
         connection.setDoOutput(true);
-
 
 
         HashMap<String, String> params = new HashMap<>();
@@ -126,20 +154,19 @@ public class SearchActivity extends BaseActivity {
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                 JSONObject jsonData = new JSONObject(result.toString());
-                Log.d("jsonData",jsonData.toString());
+                Log.d("jsonData", jsonData.toString());
                 final JSONArray searchData = jsonData.getJSONArray("data");
 
-                for(int i=0; i<searchData.length();i++){
+                for (int i = 0; i < searchData.length(); i++) {
                     JSONObject search = (JSONObject) searchData.get(i);
-                    if(search.getString("book_title").equalsIgnoreCase(input)){
-                        Log.d("asdasda","asdkjhasdkjah");
-                        searchResults.add(new Data(search.getString("book_id"),search.getString("book_title"),search.getString("photo"),
-                                search.getString("author_title"),search.getString("duration"),search.getString("price"),search.getString("category_title")));
+                    if (search.getString("book_title").contains(input) || search.getString("book_title").toLowerCase().contains(input)||
+                            search.getString("author_title").contains(input) || search.getString("author_title").toLowerCase().contains(input) ||
+                            search.getString("narrator_title").contains(input) || search.getString("narrator_title").toLowerCase().contains(input) ) {
+                        searchResults.add(new Data(search.getString("book_id"), search.getString("book_title"), search.getString("photo"),
+                                search.getString("author_title"), search.getString("duration"), search.getString("price"), search.getString("category_title")));
                     }
 
                 }
-
-
 
 
             }

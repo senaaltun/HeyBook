@@ -61,6 +61,8 @@ public class Sepet extends BaseActivity {
 
     private double totalPrice = 0;
 
+    private boolean isLastItem = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +86,13 @@ public class Sepet extends BaseActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Sepet.this,Odeme.class);
-                intent.putExtra("totalPrice",totalPrice);
-                startActivity(intent);
+
+                if(sepetList!=null){
+                    Intent intent = new Intent(Sepet.this,Odeme.class);
+                    intent.putExtra("totalPrice",totalPrice);
+                    intent.putExtra("sepetDolu",1);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -286,8 +292,8 @@ public class Sepet extends BaseActivity {
 
 
                     try {
-                        totalPrice = totalPrice - Double.parseDouble(sepetArrayList.get(viewType).getPrice());
-                        totalPayment.setText(String.format("%.2f", totalPrice) + " TL");
+                        //totalPrice = totalPrice - Double.parseDouble(sepetArrayList.get(viewType).getPrice());
+                        //totalPayment.setText(String.format("%.2f", totalPrice) + " TL");
                         deleteSepetItem(sepetArrayList.get(viewType).getBook_id());
 
                     } catch (IOException e) {
@@ -318,9 +324,9 @@ public class Sepet extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        totalPrice = totalPrice - Double.parseDouble(sepetArrayList.get(position).getPrice());
-                        totalPayment.setText(String.format("%.2f", totalPrice) + " TL");
                         deleteSepetItem(sepetArrayList.get(position).getBook_id());
+                        totalPrice-= Double.parseDouble(sepetArrayList.get(position).getPrice());
+                        totalPayment.setText(String.format("%.2f", totalPrice) + " TL");
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
@@ -331,6 +337,7 @@ public class Sepet extends BaseActivity {
                     notifyItemRangeChanged(position, sepetArrayList.size());
                 }
             });
+
         }
 
         @Override

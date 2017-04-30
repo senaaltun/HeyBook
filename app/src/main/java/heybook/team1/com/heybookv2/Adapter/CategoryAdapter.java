@@ -1,7 +1,9 @@
 package heybook.team1.com.heybookv2.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import heybook.team1.com.heybookv2.Activity.SingleBook;
 import heybook.team1.com.heybookv2.Model.Data;
 import heybook.team1.com.heybookv2.R;
 
@@ -89,11 +92,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
             categoryPrice = (TextView)view.findViewById(R.id.categoryPrice);
             categoryBookImage = (ImageView) view.findViewById(R.id.categoryBookImage);
             ratingBar = (RatingBar)view.findViewById(R.id.categoryRating);
+
+            view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(context, SingleBook.class);
+            int pos = this.getAdapterPosition();
+            intent.putExtra("Position", pos);
+            intent.putExtra("bookId",categoryData.get(pos).getBook_id());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
     }
 
